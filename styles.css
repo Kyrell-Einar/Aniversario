@@ -4,16 +4,15 @@
     padding: 0;
 }
 body {
-    font-family: 'Pacifico', cursive;
+    font-family: 'Dancing Script', cursive;
     background-color: #001f3f; /* Azul noite */
-    color: #fff;
+    color: #f0f0f0; /* Cinza claro para melhor contraste no modo escuro */
     line-height: 1.6;
-    overflow-x: hidden;
     transition: background-color 0.3s, color 0.3s;
 }
 .light-mode {
     background-color: #fff;
-    color: #001f3f;
+    color: #001f3f; /* Azul escuro no modo claro */
 }
 header {
     background-color: #ff69b4; /* Rosa suave */
@@ -50,10 +49,13 @@ nav ul li a:hover {
 .menu-toggle {
     cursor: pointer;
     font-size: 30px;
-    color: #fff;
+    color: #f0f0f0; /* Mesma cor do texto no modo escuro */
     position: absolute;
     top: 20px;
     right: 20px;
+}
+.light-mode .menu-toggle {
+    color: #001f3f; /* Ajuste no modo claro */
 }
 section {
     max-width: 800px;
@@ -80,22 +82,28 @@ input, textarea, button {
 }
 button {
     background-color: #001f3f;
-    color: #fff;
+    color: #f0f0f0; /* Melhor contraste */
     cursor: pointer;
     transition: background-color 0.3s;
 }
+.light-mode button {
+    background-color: #ff69b4;
+    color: #001f3f;
+}
 button:hover {
     background-color: #ff69b4;
+    color: #001f3f;
 }
 /* Animação de corações */
 .heart {
-    position: absolute;
+    position: fixed; /* Alterado para fixed para evitar impacto no layout */
     width: 20px;
     height: 20px;
     background: #ff69b4;
     transform: rotate(-45deg);
     animation: float 10s linear infinite;
     opacity: 0.7;
+    z-index: -1; /* Fica atrás do conteúdo */
 }
 .heart::before, .heart::after {
     content: '';

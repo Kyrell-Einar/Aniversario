@@ -39,7 +39,7 @@ form.addEventListener('submit', (e) => {
 function createHeart() {
     const heart = document.createElement('div');
     heart.classList.add('heart');
-    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.left = Math.random() * (window.innerWidth - 20) + 'px'; // Evita transbordo
     heart.style.animationDuration = Math.random() * 5 + 5 + 's';
     document.body.appendChild(heart);
     setTimeout(() => heart.remove(), 10000);
@@ -47,4 +47,4 @@ function createHeart() {
 
 setInterval(createHeart, 1000);
 
-loadRecados(); // Carrega recados ao iniciar 
+loadRecados(); // Carrega recados ao iniciar
