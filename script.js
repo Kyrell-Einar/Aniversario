@@ -47,4 +47,4 @@ function createHeart() {
 
 setInterval(createHeart, 1000);
 
-loadRecados(); // Carrega recados ao iniciar
+loadRecados(); // Carrega recados ao iniciar 
