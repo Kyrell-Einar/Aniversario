@@ -1,0 +1,138 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: 'Pacifico', cursive;
+    background-color: #001f3f; /* Azul noite */
+    color: #fff;
+    line-height: 1.6;
+    overflow-x: hidden;
+    transition: background-color 0.3s, color 0.3s;
+}
+.light-mode {
+    background-color: #fff;
+    color: #001f3f;
+}
+header {
+    background-color: #ff69b4; /* Rosa suave */
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+h1 {
+    font-size: 2.5em;
+}
+nav {
+    display: none;
+    background-color: #ff69b4;
+    padding: 10px;
+}
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+nav ul li {
+    margin: 10px;
+}
+nav ul li a {
+    color: #001f3f;
+    text-decoration: none;
+    font-size: 1.2em;
+}
+nav ul li a:hover {
+    text-decoration: underline;
+}
+.menu-toggle {
+    cursor: pointer;
+    font-size: 30px;
+    color: #fff;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+section {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+}
+.memory, .recado, .citacao {
+    background: #ff69b4;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+input, textarea, button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+}
+button {
+    background-color: #001f3f;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+button:hover {
+    background-color: #ff69b4;
+}
+/* Animação de corações */
+.heart {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #ff69b4;
+    transform: rotate(-45deg);
+    animation: float 10s linear infinite;
+    opacity: 0.7;
+}
+.heart::before, .heart::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #ff69b4;
+    border-radius: 50%;
+}
+.heart::before {
+    top: -10px;
+    left: 0;
+}
+.heart::after {
+    left: 10px;
+    top: 0;
+}
+@keyframes float {
+    0% {
+        transform: rotate(-45deg) translateY(100vh);
+        opacity: 0.7;
+    }
+    100% {
+        transform: rotate(-45deg) translateY(-100vh);
+        opacity: 0;
+    }
+}
+/* Responsividade */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.8em;
+    }
+    nav ul {
+        flex-direction: column;
+    }
+}
+/* Acessibilidade */
+:focus {
+    outline: 2px solid #ff69b4;
+}
