@@ -1,1 +1,264 @@
- 
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Um presente para o nosso aniversário de namoro, Tata, meu amor eterno.">
+    <title>Nosso Aniversário de Namoro, Tata 💖</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Pacifico', cursive;
+            background-color: #001f3f; /* Azul noite */
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .light-mode {
+            background-color: #fff;
+            color: #001f3f;
+        }
+        header {
+            background-color: #ff69b4; /* Rosa suave */
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+        h1 {
+            font-size: 2.5em;
+        }
+        nav {
+            display: none;
+            background-color: #ff69b4;
+            padding: 10px;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        nav ul li {
+            margin: 10px;
+        }
+        nav ul li a {
+            color: #001f3f;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        .menu-toggle {
+            cursor: pointer;
+            font-size: 30px;
+            color: #fff;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        section {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .memory, .recado, .citacao {
+            background: #ff69b4;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        input, textarea, button {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+        }
+        button {
+            background-color: #001f3f;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #ff69b4;
+        }
+        audio {
+            margin: 20px 0;
+            width: 100%;
+        }
+        /* Animação de corações */
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ff69b4;
+            transform: rotate(-45deg);
+            animation: float 10s linear infinite;
+            opacity: 0.7;
+        }
+        .heart::before, .heart::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ff69b4;
+            border-radius: 50%;
+        }
+        .heart::before {
+            top: -10px;
+            left: 0;
+        }
+        .heart::after {
+            left: 10px;
+            top: 0;
+        }
+        @keyframes float {
+            0% {
+                transform: rotate(-45deg) translateY(100vh);
+                opacity: 0.7;
+            }
+            100% {
+                transform: rotate(-45deg) translateY(-100vh);
+                opacity: 0;
+            }
+        }
+        /* Responsividade */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.8em;
+            }
+            nav ul {
+                flex-direction: column;
+            }
+        }
+        /* Acessibilidade */
+        :focus {
+            outline: 2px solid #ff69b4;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Nosso Aniversário de Namoro, Tata 💖</h1>
+        <div class="menu-toggle" onclick="toggleMenu()" aria-label="Abrir/fechar menu">☰</div>
+        <nav id="menu">
+            <ul>
+                <li><a href="#carta">Nossa Carta</a></li>
+                <li><a href="#memories">Memórias</a></li>
+                <li><a href="#recados">Recados</a></li>
+                <li><a href="#citacoes">Citações</a></li>
+            </ul>
+        </nav>
+        <button onclick="toggleMode()" aria-label="Alternar modo claro/escuro">Modo Claro/Escuro</button>
+    </header>
+
+    <section id="carta">
+        <h2>Para Meu Amor Eterno</h2>
+        <p>Tata, hoje celebramos mais um ano do nosso amor, que cresce mais forte a cada dia. Você é minha inspiração, meu lar, minha razão de sorrir. Este site é um presente para eternizar nossas memórias e promessas. Te amo para sempre. 💖</p>
+        <audio controls aria-label="Tocar nossa música especial">
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+            Seu navegador não suporta áudio.
+        </audio>
+    </section>
+
+    <section id="memories">
+        <h2>Nossas Memórias</h2>
+        <div class="memory">
+            <h3>Nosso Primeiro Encontro</h3>
+            <p>Aquele dia em que nossos olhos se cruzaram e o mundo parou. Você estava tão linda, e eu sabia que minha vida mudaria para sempre.</p>
+        </div>
+        <div class="memory">
+            <h3>Viagem dos Sonhos</h3>
+            <p>Lembra daquela noite sob as estrelas? Planejamos nosso futuro, e cada palavra ainda vive em mim.</p>
+        </div>
+        <!-- Adicione mais memórias aqui -->
+    </section>
+
+    <section id="recados">
+        <h2>Recados para Você</h2>
+        <form id="recado-form">
+            <input type="text" id="titulo" placeholder="Título do Recado" required aria-label="Título do recado">
+            <textarea id="mensagem" placeholder="Escreva seu recado..." required aria-label="Mensagem do recado"></textarea>
+            <button type="submit">Adicionar Recado</button>
+        </form>
+        <div id="recados-list"></div>
+    </section>
+
+    <section id="citacoes">
+        <h2>Citações que Nos Representam</h2>
+        <div class="citacao">
+            <p>"Se não é amor, é o que há de mais próximo disso." — Jane Austen, Orgulho e Preconceito</p>
+        </div>
+        <div class="citacao">
+            <p>"Você é minha canção preferida, que nunca sai do coração." — Inspirado em Ana Carolina</p>
+        </div>
+    </section>
+
+    <script>
+        // Toggle Menu
+        function toggleMenu() {
+            const menu = document.getElementById('menu');
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // Toggle Modo Claro/Escuro
+        function toggleMode() {
+            document.body.classList.toggle('light-mode');
+        }
+
+        // Gerenciar Recados (LocalStorage)
+        const form = document.getElementById('recado-form');
+        const list = document.getElementById('recados-list');
+
+        function loadRecados() {
+            const recados = JSON.parse(localStorage.getItem('recados')) || [];
+            list.innerHTML = '';
+            recados.forEach(recado => {
+                const div = document.createElement('div');
+                div.classList.add('recado');
+                div.innerHTML = `<h3>${recado.titulo}</h3><p>${recado.mensagem}</p>`;
+                list.appendChild(div);
+            });
+        }
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const titulo = document.getElementById('titulo').value;
+            const mensagem = document.getElementById('mensagem').value;
+            const recados = JSON.parse(localStorage.getItem('recados')) || [];
+            recados.push({ titulo, mensagem });
+            localStorage.setItem('recados', JSON.stringify(recados));
+            loadRecados();
+            form.reset();
+        });
+
+        // Animação de Corações
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 5 + 5 + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 10000);
+        }
+
+        setInterval(createHeart, 1000);
+
+        loadRecados(); // Carrega recados ao iniciar
+    </script>
+</body>
+</html>
