@@ -65,7 +65,7 @@ setInterval(createHeart, 1000);
 const messages = [
     "Você é meu tudo, Tata! Meu coração bate por você. 💖",
     "Cada dia ao seu lado é como um sonho do qual nunca quero acordar.",
-    "Te amo mais do que as palavras podem dizer, minha eterna companheira.",
+    "Eu te amo mais do que as palavras podem dizer, minha eterna companheira.",
     "Você ilumina meus dias como ninguém, Tata. Sempre vou te amar!",
     "Nosso amor é a melhor aventura da minha vida. 💞"
 ];
