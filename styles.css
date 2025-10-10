@@ -3,6 +3,7 @@
     margin: 0;
     padding: 0;
 }
+
 body {
     font-family: 'Dancing Script', cursive;
     background-color: #001f3f;
@@ -10,11 +11,14 @@ body {
     font-size: 18px;
     line-height: 1.6;
     transition: background-color 0.3s, color 0.3s;
+    overflow: hidden;
 }
+
 .light-mode {
     background-color: #fff;
     color: #001f3f;
 }
+
 header {
     background-color: #ff69b4;
     padding: 20px;
@@ -22,34 +26,42 @@ header {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     position: relative;
 }
+
 h1 {
     font-size: 3em;
 }
+
 h2 {
     font-size: 2.2em;
 }
+
 nav {
     display: none;
     background-color: #ff69b4;
     padding: 10px;
 }
+
 nav ul {
     list-style: none;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
 }
+
 nav ul li {
     margin: 10px;
 }
+
 nav ul li a {
     color: #001f3f;
     text-decoration: none;
     font-size: 1.4em;
 }
+
 nav ul li a:hover {
     text-decoration: underline;
 }
+
 .menu-toggle {
     cursor: pointer;
     font-size: 30px;
@@ -58,14 +70,17 @@ nav ul li a:hover {
     top: 20px;
     right: 20px;
 }
+
 .light-mode .menu-toggle {
     color: #001f3f;
 }
+
 section {
     max-width: 800px;
     margin: 20px auto;
     padding: 20px;
 }
+
 .memory, .recado, .citacao {
     background: #ff69b4;
     color: #001f3f;
@@ -74,16 +89,21 @@ section {
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+
 .memory p, .recado p, .citacao p {
     font-size: 1.2em;
+    font-family: Arial, sans-serif;
 }
+
 .memory h3, .recado h3 {
     font-size: 1.8em;
 }
+
 .recado {
     position: relative;
     padding-bottom: 40px;
 }
+
 .delete-btn {
     position: absolute;
     bottom: 10px;
@@ -97,14 +117,17 @@ section {
     font-family: Arial, sans-serif;
     font-size: 0.9em;
 }
+
 .delete-btn:hover {
     background-color: #cc0000;
 }
+
 form {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
+
 input, textarea, button {
     padding: 10px;
     border: none;
@@ -112,20 +135,24 @@ input, textarea, button {
     font-family: Arial, sans-serif;
     font-size: 1.1em;
 }
-button:not(.delete-btn):not(.game-heart):not(.modal-close) {
+
+button:not(.delete-btn):not(.game-heart):not(.modal-close):not(.modal-extra) {
     background-color: #001f3f;
     color: #f0f0f0;
     cursor: pointer;
     transition: background-color 0.3s;
 }
-.light-mode button:not(.delete-btn):not(.game-heart):not(.modal-close) {
+
+.light-mode button:not(.delete-btn):not(.game-heart):not(.modal-close):not(.modal-extra) {
     background-color: #ff69b4;
     color: #001f3f;
 }
-button:not(.delete-btn):not(.game-heart):not(.modal-close):hover {
+
+button:not(.delete-btn):not(.game-heart):not(.modal-close):not(.modal-extra):hover {
     background-color: #ff69b4;
     color: #001f3f;
 }
+
 .heart {
     position: fixed;
     width: 20px;
@@ -136,6 +163,7 @@ button:not(.delete-btn):not(.game-heart):not(.modal-close):hover {
     opacity: 0.7;
     z-index: -1;
 }
+
 .heart::before, .heart::after {
     content: '';
     position: absolute;
@@ -144,14 +172,17 @@ button:not(.delete-btn):not(.game-heart):not(.modal-close):hover {
     background: #ff69b4;
     border-radius: 50%;
 }
+
 .heart::before {
     top: -10px;
     left: 0;
 }
+
 .heart::after {
     left: 10px;
     top: 0;
 }
+
 @keyframes float {
     0% {
         transform: rotate(-45deg) translateY(100vh);
@@ -162,34 +193,64 @@ button:not(.delete-btn):not(.game-heart):not(.modal-close):hover {
         opacity: 0;
     }
 }
+
 #minijogo {
     text-align: center;
 }
+
+#heart-count {
+    font-size: 1.4em;
+    margin-top: 10px;
+    display: inline-block;
+    transition: color 0.3s;
+}
+
+#heart-count.highlight {
+    color: #ff69b4;
+}
+
 .game-heart {
     position: fixed;
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
     background: #c71585;
     transform: rotate(-45deg);
     cursor: pointer;
     z-index: 500;
+    animation: pulse 1.5s ease-in-out infinite;
 }
+
 .game-heart::before, .game-heart::after {
     content: '';
     position: absolute;
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
     background: #c71585;
     border-radius: 50%;
 }
+
 .game-heart::before {
-    top: -17.5px;
+    top: -20px;
     left: 0;
 }
+
 .game-heart::after {
-    left: 17.5px;
+    left: 20px;
     top: 0;
 }
+
+@keyframes pulse {
+    0% {
+        transform: rotate(-45deg) scale(1);
+    }
+    50% {
+        transform: rotate(-45deg) scale(1.2);
+    }
+    100% {
+        transform: rotate(-45deg) scale(1);
+    }
+}
+
 .modal {
     display: none;
     position: fixed;
@@ -202,31 +263,43 @@ button:not(.delete-btn):not(.game-heart):not(.modal-close):hover {
     justify-content: center;
     align-items: center;
 }
+
 .modal-content {
     background: #ffe4e1;
     color: #001f3f;
-    padding: 20px;
+    padding: 30px;
     border-radius: 8px;
     text-align: center;
     max-width: 80%;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.5s ease-in;
 }
+
+@keyframes fadeIn {
+    0% { opacity: 0; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
 #modal-message {
-    font-size: 1.3em;
+    font-size: 1.4em;
+    margin-bottom: 10px;
 }
-.modal-close {
+
+.modal-close, .modal-extra {
     background-color: #ff69b4;
     color: #001f3f;
     border: none;
     padding: 10px;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 10px;
+    margin: 5px;
     font-family: Arial, sans-serif;
 }
-.modal-close:hover {
+
+.modal-close:hover, .modal-extra:hover {
     background-color: #cc0055;
 }
+
 @media (max-width: 600px) {
     h1 {
         font-size: 2.2em;
@@ -237,7 +310,14 @@ button:not(.delete-btn):not(.game-heart):not(.modal-close):hover {
     nav ul {
         flex-direction: column;
     }
+    .modal-content {
+        padding: 20px;
+    }
+    #modal-message {
+        font-size: 1.2em;
+    }
 }
+
 :focus {
     outline: 2px solid #ff69b4;
 }
