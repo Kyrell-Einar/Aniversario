@@ -5,24 +5,28 @@
 }
 body {
     font-family: 'Dancing Script', cursive;
-    background-color: #001f3f; /* Azul noite */
-    color: #f0f0f0; /* Cinza claro para modo escuro */
+    background-color: #001f3f;
+    color: #f0f0f0;
+    font-size: 18px;
     line-height: 1.6;
     transition: background-color 0.3s, color 0.3s;
 }
 .light-mode {
     background-color: #fff;
-    color: #001f3f; /* Azul escuro no modo claro */
+    color: #001f3f;
 }
 header {
-    background-color: #ff69b4; /* Rosa suave */
+    background-color: #ff69b4;
     padding: 20px;
     text-align: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     position: relative;
 }
 h1 {
-    font-size: 2.5em;
+    font-size: 3em;
+}
+h2 {
+    font-size: 2.2em;
 }
 nav {
     display: none;
@@ -41,7 +45,7 @@ nav ul li {
 nav ul li a {
     color: #001f3f;
     text-decoration: none;
-    font-size: 1.2em;
+    font-size: 1.4em;
 }
 nav ul li a:hover {
     text-decoration: underline;
@@ -49,13 +53,13 @@ nav ul li a:hover {
 .menu-toggle {
     cursor: pointer;
     font-size: 30px;
-    color: #f0f0f0; /* Mesma cor do texto no modo escuro */
+    color: #f0f0f0;
     position: absolute;
     top: 20px;
     right: 20px;
 }
 .light-mode .menu-toggle {
-    color: #001f3f; /* Ajuste no modo claro */
+    color: #001f3f;
 }
 section {
     max-width: 800px;
@@ -64,21 +68,27 @@ section {
 }
 .memory, .recado, .citacao {
     background: #ff69b4;
-    color: #001f3f; /* Azul escuro para contraste com fundo rosa */
+    color: #001f3f;
     padding: 15px;
     margin: 10px 0;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+.memory p, .recado p, .citacao p {
+    font-size: 1.2em;
+}
+.memory h3, .recado h3 {
+    font-size: 1.8em;
+}
 .recado {
     position: relative;
-    padding-bottom: 40px; /* Espaço para o botão de apagar */
+    padding-bottom: 40px;
 }
 .delete-btn {
     position: absolute;
     bottom: 10px;
     right: 10px;
-    background-color: #ff4444; /* Vermelho para exclusão */
+    background-color: #ff4444;
     color: #fff;
     border: none;
     padding: 5px 10px;
@@ -100,31 +110,31 @@ input, textarea, button {
     border: none;
     border-radius: 5px;
     font-family: Arial, sans-serif;
+    font-size: 1.1em;
 }
-button:not(.delete-btn) {
+button:not(.delete-btn):not(.game-heart):not(.modal-close) {
     background-color: #001f3f;
-    color: #f0f0f0; /* Melhor contraste */
+    color: #f0f0f0;
     cursor: pointer;
     transition: background-color 0.3s;
 }
-.light-mode button:not(.delete-btn) {
+.light-mode button:not(.delete-btn):not(.game-heart):not(.modal-close) {
     background-color: #ff69b4;
     color: #001f3f;
 }
-button:not(.delete-btn):hover {
+button:not(.delete-btn):not(.game-heart):not(.modal-close):hover {
     background-color: #ff69b4;
     color: #001f3f;
 }
-/* Animação de corações */
 .heart {
-    position: fixed; /* Evita impacto no layout */
+    position: fixed;
     width: 20px;
     height: 20px;
     background: #ff69b4;
     transform: rotate(-45deg);
     animation: float 10s linear infinite;
     opacity: 0.7;
-    z-index: -1; /* Fica atrás do conteúdo */
+    z-index: -1;
 }
 .heart::before, .heart::after {
     content: '';
@@ -152,16 +162,78 @@ button:not(.delete-btn):hover {
         opacity: 0;
     }
 }
-/* Responsividade */
+#minijogo {
+    text-align: center;
+}
+.game-heart {
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    background: #ff69b4;
+    transform: rotate(-45deg);
+    cursor: pointer;
+    z-index: 10;
+}
+.game-heart::before, .game-heart::after {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: #ff69b4;
+    border-radius: 50%;
+}
+.game-heart::before {
+    top: -15px;
+    left: 0;
+}
+.game-heart::after {
+    left: 15px;
+    top: 0;
+}
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+}
+.modal-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 80%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+.modal-close {
+    background-color: #ff69b4;
+    color: #001f3f;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-family: Arial, sans-serif;
+}
+.modal-close:hover {
+    background-color: #cc0055;
+}
 @media (max-width: 600px) {
     h1 {
+        font-size: 2.2em;
+    }
+    h2 {
         font-size: 1.8em;
     }
     nav ul {
         flex-direction: column;
     }
 }
-/* Acessibilidade */
 :focus {
     outline: 2px solid #ff69b4;
 }

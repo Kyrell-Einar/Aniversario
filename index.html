@@ -16,6 +16,7 @@
             font-family: 'Dancing Script', cursive;
             background-color: #001f3f; /* Azul noite */
             color: #f0f0f0; /* Cinza claro para modo escuro */
+            font-size: 18px; /* Aumentado para legibilidade */
             line-height: 1.6;
             transition: background-color 0.3s, color 0.3s;
         }
@@ -31,7 +32,10 @@
             position: relative;
         }
         h1 {
-            font-size: 2.5em;
+            font-size: 3em; /* Aumentado */
+        }
+        h2 {
+            font-size: 2.2em; /* Aumentado */
         }
         nav {
             display: none;
@@ -50,7 +54,7 @@
         nav ul li a {
             color: #001f3f;
             text-decoration: none;
-            font-size: 1.2em;
+            font-size: 1.4em; /* Aumentado */
         }
         nav ul li a:hover {
             text-decoration: underline;
@@ -78,6 +82,12 @@
             margin: 10px 0;
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .memory p, .recado p, .citacao p {
+            font-size: 1.2em; /* Aumentado para legibilidade */
+        }
+        .memory h3, .recado h3 {
+            font-size: 1.8em; /* Aumentado */
         }
         .recado {
             position: relative;
@@ -109,31 +119,32 @@
             border: none;
             border-radius: 5px;
             font-family: Arial, sans-serif;
+            font-size: 1.1em; /* Aumentado */
         }
-        button:not(.delete-btn) {
+        button:not(.delete-btn):not(.game-heart):not(.modal-close) {
             background-color: #001f3f;
             color: #f0f0f0; /* Melhor contraste */
             cursor: pointer;
             transition: background-color 0.3s;
         }
-        .light-mode button:not(.delete-btn) {
+        .light-mode button:not(.delete-btn):not(.game-heart):not(.modal-close) {
             background-color: #ff69b4;
             color: #001f3f;
         }
-        button:not(.delete-btn):hover {
+        button:not(.delete-btn):not(.game-heart):not(.modal-close):hover {
             background-color: #ff69b4;
             color: #001f3f;
         }
-        /* Animação de corações */
+        /* Animação de corações decorativos */
         .heart {
-            position: fixed; /* Evita impacto no layout */
+            position: fixed;
             width: 20px;
             height: 20px;
             background: #ff69b4;
             transform: rotate(-45deg);
             animation: float 10s linear infinite;
             opacity: 0.7;
-            z-index: -1; /* Fica atrás do conteúdo */
+            z-index: -1;
         }
         .heart::before, .heart::after {
             content: '';
@@ -161,9 +172,74 @@
                 opacity: 0;
             }
         }
+        /* Estilização do minijogo */
+        #minijogo {
+            text-align: center;
+        }
+        .game-heart {
+            position: fixed;
+            width: 30px;
+            height: 30px;
+            background: #ff69b4;
+            transform: rotate(-45deg);
+            cursor: pointer;
+            z-index: 10;
+        }
+        .game-heart::before, .game-heart::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: #ff69b4;
+            border-radius: 50%;
+        }
+        .game-heart::before {
+            top: -15px;
+            left: 0;
+        }
+        .game-heart::after {
+            left: 15px;
+            top: 0;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            max-width: 80%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        .modal-close {
+            background-color: #ff69b4;
+            color: #001f3f;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-family: Arial, sans-serif;
+        }
+        .modal-close:hover {
+            background-color: #cc0055;
+        }
         /* Responsividade */
         @media (max-width: 600px) {
             h1 {
+                font-size: 2.2em;
+            }
+            h2 {
                 font-size: 1.8em;
             }
             nav ul {
@@ -186,6 +262,7 @@
                 <li><a href="#memories">Memórias</a></li>
                 <li><a href="#recados">Recados</a></li>
                 <li><a href="#citacoes">Citações</a></li>
+                <li><a href="#minijogo">Minijogo</a></li>
             </ul>
         </nav>
         <button onclick="toggleMode()" aria-label="Alternar modo claro/escuro">Modo Claro/Escuro</button>
@@ -200,7 +277,7 @@
         <h2>Nossas Memórias</h2>
         <div class="memory">
             <h3>Nosso Primeiro Encontro</h3>
-            <p>Aquele dia em que nossos olhos se cruzaram e o mundo parou. Você estava tão linda, e eu sabia que minha vida mudaria para sempre.</p>
+            <p>Aquele dia em que nossos olhos se cruzaram e o mundo parou. Você ().</p>
         </div>
         <div class="memory">
             <h3>Viagem dos Sonhos</h3>
@@ -226,6 +303,18 @@
         </div>
         <div class="citacao">
             <p>"Você é minha canção preferida, que nunca sai do coração." — Inspirado em Ana Carolina</p>
+        </div>
+    </section>
+
+    <section id="minijogo">
+        <h2>Minijogo Romântico</h2>
+        <p>Clique nos corações flutuantes para revelar mensagens especiais para você, Tata! 💖</p>
+        <button onclick="startGame()" aria-label="Iniciar minijogo">Começar Jogo</button>
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <p id="modal-message">Mensagem romântica aqui!</p>
+                <button class="modal-close" onclick="closeModal()" aria-label="Fechar mensagem">Fechar</button>
+            </div>
         </div>
     </section>
 
@@ -275,23 +364,63 @@
         function deleteRecado(index) {
             if (confirm("Tem certeza que deseja apagar este recado?")) {
                 const recados = JSON.parse(localStorage.getItem('recados')) || [];
-                recados.splice(index, 1); // Remove o recado no índice especificado
+                recados.splice(index, 1);
                 localStorage.setItem('recados', JSON.stringify(recados));
-                loadRecados(); // Atualiza a lista
+                loadRecados();
             }
         }
 
-        // Animação de Corações
+        // Animação de Corações Decorativos
         function createHeart() {
             const heart = document.createElement('div');
             heart.classList.add('heart');
-            heart.style.left = Math.random() * (window.innerWidth - 20) + 'px'; // Evita transbordo
+            heart.style.left = Math.random() * (window.innerWidth - 20) + 'px';
             heart.style.animationDuration = Math.random() * 5 + 5 + 's';
             document.body.appendChild(heart);
             setTimeout(() => heart.remove(), 10000);
         }
 
         setInterval(createHeart, 1000);
+
+        // Minijogo Romântico
+        const messages = [
+            "Você é meu tudo, Tata! Meu coração bate por você. 💖",
+            "Cada dia ao seu lado é como um sonho do qual nunca quero acordar.",
+            "Te amo mais do que as palavras podem dizer, minha eterna companheira.",
+            "Você ilumina meus dias como ninguém, Tata. Sempre vou te amar!",
+            "Nosso amor é a melhor aventura da minha vida. 💞"
+        ];
+
+        function startGame() {
+            const gameHeart = document.createElement('div');
+            gameHeart.classList.add('game-heart');
+            gameHeart.style.left = Math.random() * (window.innerWidth - 30) + 'px';
+            gameHeart.style.top = Math.random() * (window.innerHeight - 30) + 'px';
+            gameHeart.addEventListener('click', () => {
+                const modal = document.getElementById('modal');
+                const message = document.getElementById('modal-message');
+                message.textContent = messages[Math.floor(Math.random() * messages.length)];
+                modal.style.display = 'flex';
+                gameHeart.remove();
+                setTimeout(createGameHeart, 1000);
+            });
+            document.body.appendChild(gameHeart);
+        }
+
+        function createGameHeart() {
+            startGame();
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        // Fechar modal com tecla Enter ou Esc
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === 'Escape') {
+                closeModal();
+            }
+        });
 
         loadRecados(); // Carrega recados ao iniciar
     </script>

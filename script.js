@@ -43,17 +43,17 @@ form.addEventListener('submit', (e) => {
 function deleteRecado(index) {
     if (confirm("Tem certeza que deseja apagar este recado?")) {
         const recados = JSON.parse(localStorage.getItem('recados')) || [];
-        recados.splice(index, 1); // Remove o recado no índice especificado
+        recados.splice(index, 1);
         localStorage.setItem('recados', JSON.stringify(recados));
-        loadRecados(); // Atualiza a lista
+        loadRecados();
     }
 }
 
-// Animação de Corações
+// Animação de Corações Decorativos
 function createHeart() {
     const heart = document.createElement('div');
     heart.classList.add('heart');
-    heart.style.left = Math.random() * (window.innerWidth - 20) + 'px'; // Evita transbordo
+    heart.style.left = Math.random() * (window.innerWidth - 20) + 'px';
     heart.style.animationDuration = Math.random() * 5 + 5 + 's';
     document.body.appendChild(heart);
     setTimeout(() => heart.remove(), 10000);
@@ -61,4 +61,43 @@ function createHeart() {
 
 setInterval(createHeart, 1000);
 
-loadRecados(); // Carrega recados ao iniciar
+// Minijogo Romântico
+const messages = [
+    "Você é meu tudo, Tata! Meu coração bate por você. 💖",
+    "Cada dia ao seu lado é como um sonho do qual nunca quero acordar.",
+    "Te amo mais do que as palavras podem dizer, minha eterna companheira.",
+    "Você ilumina meus dias como ninguém, Tata. Sempre vou te amar!",
+    "Nosso amor é a melhor aventura da minha vida. 💞"
+];
+
+function startGame() {
+    const gameHeart = document.createElement('div');
+    gameHeart.classList.add('game-heart');
+    gameHeart.style.left = Math.random() * (window.innerWidth - 30) + 'px';
+    gameHeart.style.top = Math.random() * (window.innerHeight - 30) + 'px';
+    gameHeart.addEventListener('click', () => {
+        const modal = document.getElementById('modal');
+        const message = document.getElementById('modal-message');
+        message.textContent = messages[Math.floor(Math.random() * messages.length)];
+        modal.style.display = 'flex';
+        gameHeart.remove();
+        setTimeout(createGameHeart, 1000);
+    });
+    document.body.appendChild(gameHeart);
+}
+
+function createGameHeart() {
+    startGame();
+}
+
+function closeModal() {
+    document.getElementById('modal').style.display = 'none';
+}
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === 'Escape') {
+        closeModal();
+    }
+});
+
+loadRecados();
