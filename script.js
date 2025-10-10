@@ -1,169 +1,266 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('recado-form');
-    const list = document.getElementById('recados-list');
-    const heartCountDisplay = document.getElementById('heart-count');
-    const modal = document.getElementById('modal');
-    const modalMessage = document.getElementById('modal-message');
-    const toggleModeBtn = document.getElementById('toggleMode');
-
-    let heartCount = 0;
-    let isGameRunning = false;
-    const messages = [
-        "Você é meu tudo, Tata! Meu coração bate por você. 💖",
-        "Cada dia ao seu lado é como um sonho do qual nunca quero acordar.",
-        "Eu te amo mais do que as palavras podem dizer, minha eterna companheira.",
-        "Você ilumina meus dias como ninguém, Tata. Sempre vou te amar!",
-        "Nosso amor é a melhor aventura da minha vida. 💞"
-    ];
-    const extraMessages = [
-        "Você já pensou como nossas risadas juntas são a melhor música?",
-        "Seu sorriso é minha luz, mesmo nos dias mais cinzentos.",
-        "Quero segurar sua mão para sempre, em cada aventura.",
-        "Você é minha casa, não importa onde estejamos.",
-        "Cada beijo seu é como um capítulo novo da nossa história."
-    ];
-    const finalMessage = "Tata, você coletou todos os corações do meu amor! Eu te amo eternamente! 💖";
-    let usedMessages = [];
-
-    // Carregar modo salvo
-    if (localStorage.getItem('theme') === 'light') {
-        document.body.classList.add('light-mode');
-        toggleModeBtn.textContent = 'Modo Escuro';
-    }
-
-    // Carregar recados salvos
-    function loadRecados() {
-        const recados = JSON.parse(localStorage.getItem('recados')) || [];
-        list.innerHTML = '';
-        recados.forEach((recado, index) => {
-            const div = document.createElement('div');
-            div.classList.add('recado');
-            div.innerHTML = `
-                <h3>${recado.titulo}</h3>
-                <p>${recado.mensagem}</p>
-                <button class="delete-btn" onclick="deleteRecado(${index})" aria-label="Apagar recado">Apagar</button>
-            `;
-            list.appendChild(div);
-        });
-    }
-
-    // Adicionar recado
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const titulo = document.getElementById('titulo').value;
-        const mensagem = document.getElementById('mensagem').value;
-        const recados = JSON.parse(localStorage.getItem('recados')) || [];
-        recados.push({ titulo, mensagem });
-        localStorage.setItem('recados', JSON.stringify(recados));
-        loadRecados();
-        form.reset();
-        party.confetti(form, { count: party.variation.range(20, 40), shapes: ['heart'] });
-    });
-
-    // Apagar recado
-    window.deleteRecado = function(index) {
-        if (confirm("Tem certeza que deseja apagar este recado?")) {
-            const recados = JSON.parse(localStorage.getItem('recados')) || [];
-            recados.splice(index, 1);
-            localStorage.setItem('recados', JSON.stringify(recados));
-            loadRecados();
-        }
-    };
-
-    // Alternar modo claro/escuro
-    toggleModeBtn.addEventListener('click', () => {
-        document.body.classList.toggle('light-mode');
-        toggleModeBtn.textContent = document.body.classList.contains('light-mode') ? 'Modo Escuro' : 'Modo Claro';
-        localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
-    });
-
-    // Toggle menu
-    window.toggleMenu = function() {
-        const menu = document.getElementById('menu');
-        menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-    };
-
-    // Animação de corações decorativos
-    function createHeart() {
-        const heart = document.createElement('div');
-        heart.classList.add('heart');
-        heart.style.left = Math.random() * (window.innerWidth - 20) + 'px';
-        heart.style.animationDuration = Math.random() * 5 + 5 + 's';
-        document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 10000);
-    }
-
-    setInterval(createHeart, 1000);
-
-    // Minijogo romântico
-    window.startGame = function() {
-        if (!isGameRunning) {
-            isGameRunning = true;
-            usedMessages = [];
-            heartCount = 0;
-            heartCountDisplay.textContent = heartCount;
-            heartCountDisplay.classList.remove('highlight');
-            createGameHeart();
-        }
-    };
-
-    function createGameHeart() {
-        if (!isGameRunning) return;
-        const gameHeart = document.createElement('div');
-        gameHeart.classList.add('game-heart');
-        gameHeart.style.left = Math.random() * (window.innerWidth - 40) + 'px';
-        gameHeart.style.top = Math.random() * (window.innerHeight - 40) + 'px';
-        document.body.appendChild(gameHeart);
-
-        gameHeart.addEventListener('click', () => {
-            heartCount++;
-            heartCountDisplay.textContent = heartCount;
-            heartCountDisplay.classList.add('highlight');
-            setTimeout(() => heartCountDisplay.classList.remove('highlight'), 500);
-
-            party.confetti(gameHeart, { count: party.variation.range(10, 20), shapes: ['heart'] });
-            gameHeart.remove();
-
-            if (usedMessages.length >= messages.length) {
-                modalMessage.textContent = finalMessage;
-                modal.style.display = 'flex';
-                isGameRunning = false;
-                return;
-            }
-
-            let message;
-            do {
-                message = messages[Math.floor(Math.random() * messages.length)];
-            } while (usedMessages.includes(message));
-            usedMessages.push(message);
-            modalMessage.textContent = message;
-            modal.style.display = 'flex';
-
-            setTimeout(createGameHeart, 1000);
-        });
-
-        setTimeout(() => {
-            if (gameHeart.parentNode && isGameRunning) {
-                gameHeart.remove();
-                setTimeout(createGameHeart, 1000);
-            }
-        }, 5000);
-    }
-
-    window.closeModal = function() {
-        modal.style.display = 'none';
-    };
-
-    window.showExtraMessage = function() {
-        modalMessage.textContent = extraMessages[Math.floor(Math.random() * extraMessages.length)];
-    };
-
-    // Fechar modal com tecla Enter ou Esc
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === 'Escape') {
-            closeModal();
-        }
-    });
-
-    loadRecados();
+// Inicializar Partículas
+particlesJS('particles-js', {
+    particles: {
+        number: { value: 50, density: { enable: true, value_area: 800 } },
+        color: { value: '#ec4899' },
+        shape: { type: 'circle' },
+        opacity: { value: 0.5, random: true },
+        size: { value: 3, random: true },
+        line_linked: { enable: false },
+        move: { enable: true, speed: 2, direction: 'none', random: true, straight: false, out_mode: 'out', bounce: false }
+    },
+    interactivity: { detect_on: 'canvas', events: { onhover: { enable: true, mode: 'bubble' }, onclick: { enable: true, mode: 'repulse' } } },
+    retina_detect: true
 });
+
+// Toggle Dark Mode
+const body = document.body;
+const darkModeToggle = document.getElementById('darkModeToggle');
+const lightIcon = document.getElementById('lightIcon');
+const darkIcon = document.getElementById('darkIcon');
+darkModeToggle.addEventListener('click', () => {
+    body.classList.toggle('dark-mode');
+    lightIcon.classList.toggle('hidden');
+    darkIcon.classList.toggle('hidden');
+});
+
+// Controle de Música
+const music = document.getElementById('backgroundMusic');
+const musicToggle = document.getElementById('musicToggle');
+const playIcon = document.getElementById('playIcon');
+const pauseIcon = document.getElementById('pauseIcon');
+let isPlaying = false;
+musicToggle.addEventListener('click', () => {
+    if (isPlaying) {
+        music.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":[]}', '*');
+        playIcon.classList.remove('hidden');
+        pauseIcon.classList.add('hidden');
+        isPlaying = false;
+    } else {
+        music.contentWindow.postMessage('{"event":"command","func":"playVideo","args":[]}', '*');
+        playIcon.classList.add('hidden');
+        pauseIcon.classList.remove('hidden');
+        isPlaying = true;
+    }
+});
+
+// Contador de Dias Juntos
+const startDate = new Date('2024-11-09');
+const today = new Date();
+const daysTogether = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
+document.getElementById('daysTogether').textContent = `Dias Juntos: ${daysTogether}`;
+
+// Inicializar GSAP
+gsap.registerPlugin();
+gsap.from('#hero h1', { duration: 1.5, y: 50, opacity: 0, ease: 'power2.out', delay: 0.5 });
+gsap.from('#hero p', { duration: 1.5, y: 50, opacity: 0, ease: 'power2.out', delay: 0.8 });
+gsap.from('#hero a', { duration: 1.5, y: 50, opacity: 0, ease: 'power2.out', delay: 1 });
+
+// Animação da Timeline
+const timelineItems = document.querySelectorAll('.timeline-item');
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            gsap.from(entry.target, { duration: 1, y: 50, opacity: 0, ease: 'power2.out' });
+        }
+    });
+}, { threshold: 0.2 });
+timelineItems.forEach(item => observer.observe(item));
+
+// Inicializar Swiper
+const swiper = new Swiper('.swiper', {
+    loop: true,
+    autoplay: { delay: 4000, disableOnInteraction: false },
+    pagination: { el: '.swiper-pagination', clickable: true },
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    },
+    breakpoints: {
+        640: { slidesPerView: 1 },
+        768: { slidesPerView: 2, spaceBetween: 20 },
+        1024: { slidesPerView: 3, spaceBetween: 30 },
+    }
+});
+
+// Botão de Surpresa
+document.getElementById('loveButton').addEventListener('click', () => {
+    const message = document.getElementById('surpriseMessage');
+    message.classList.toggle('hidden');
+    if (!message.classList.contains('hidden')) {
+        gsap.from('#surpriseMessage', { duration: 1.2, scale: 0.7, opacity: 0, ease: 'elastic.out(1, 0.3)' });
+    }
+});
+
+// Smooth Scroll
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+});
+
+// Jogo de Corações Melhorado
+const canvas = document.getElementById('heartGame');
+const ctx = canvas.getContext('2d');
+canvas.width = canvas.offsetWidth;
+canvas.height = canvas.offsetHeight;
+
+const messages = ['Eu te amo', 'Te amo para sempre', 'Meu amor eterno', 'Você é tudo para mim', 'Amor da minha vida', 'Para sempre juntos', 'Meu coração é seu', 'Te adoro', 'Amor infinito', 'Você me completa'];
+let hearts = [];
+let powerUps = [];
+let score = 0;
+const maxScore = 15;
+let gameActive = true;
+let timeLeft = 60;
+let level = 1;
+const scoreDisplay = document.getElementById('scoreDisplay');
+const timerDisplay = document.getElementById('timerDisplay');
+const levelDisplay = document.getElementById('levelDisplay');
+const finalScore = document.getElementById('finalScore');
+
+class Heart {
+    constructor() {
+        this.x = Math.random() * (canvas.width - 50) + 25;
+        this.y = Math.random() * (canvas.height - 50) + 25;
+        this.dx = (Math.random() - 0.5) * (3 + level);
+        this.dy = (Math.random() - 0.5) * (3 + level);
+        this.message = messages[Math.floor(Math.random() * messages.length)];
+        this.id = Date.now() + Math.random();
+        this.isPowerUp = false;
+    }
+}
+
+class PowerUp extends Heart {
+    constructor() {
+        super();
+        this.isPowerUp = true;
+    }
+}
+
+function addHeart() {
+    if (gameActive && hearts.length < 6 + level) {
+        hearts.push(new Heart());
+    }
+}
+
+function addPowerUp() {
+    if (gameActive && powerUps.length < level) {
+        powerUps.push(new PowerUp());
+    }
+}
+
+function animate() {
+    if (!gameActive) return;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    hearts.forEach(heart => {
+        heart.update();
+        heart.draw();
+    });
+    powerUps.forEach(powerUp => {
+        powerUp.update();
+        ctx.font = '40px Poppins';
+        ctx.fillStyle = body.classList.contains('dark-mode') ? '#ffd700' : '#ffd700';
+        ctx.fillText('⭐', powerUp.x, powerUp.y);
+    });
+    requestAnimationFrame(animate);
+}
+
+function showMessage(x, y, message) {
+    const messageDiv = document.createElement('div');
+    messageDiv.className = 'heart-message';
+    messageDiv.textContent = message;
+    messageDiv.style.left = `${x}px`;
+    messageDiv.style.top = `${y}px`;
+    canvas.parentElement.appendChild(messageDiv);
+    gsap.to(messageDiv, { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: 'back.out(1.7)', onComplete: () => {
+        gsap.to(messageDiv, { opacity: 0, scale: 0.8, duration: 0.6, delay: 1.5, onComplete: () => messageDiv.remove() });
+    } });
+}
+
+canvas.addEventListener('click', (e) => {
+    if (!gameActive) return;
+    const rect = canvas.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const clickY = e.clientY - rect.top;
+
+    hearts = hearts.filter(heart => {
+        if (Math.abs(heart.x - clickX) < 40 && Math.abs(heart.y - clickY) < 40) {
+            showMessage(clickX, clickY, heart.message);
+            score += level;
+            updateScore();
+            checkLevelUp();
+            return false;
+        }
+        return true;
+    });
+
+    powerUps = powerUps.filter(powerUp => {
+        if (Math.abs(powerUp.x - clickX) < 40 && Math.abs(powerUp.y - clickY) < 40) {
+            timeLeft += 10; // Extra time
+            showMessage(clickX, clickY, '+10 segundos!');
+            return false;
+        }
+        return true;
+    });
+});
+
+function updateScore() {
+    scoreDisplay.textContent = `Corações Coletados: ${score} / ${maxScore}`;
+    if (score >= maxScore) {
+        endGame();
+    }
+}
+
+function checkLevelUp() {
+    if (score >= level * 5) {
+        level++;
+        levelDisplay.textContent = `Nível: ${level}`;
+        timeLeft += 20; // Bonus time on level up
+    }
+}
+
+function startTimer() {
+    const timerInterval = setInterval(() => {
+        if (!gameActive) {
+            clearInterval(timerInterval);
+            return;
+        }
+        timeLeft--;
+        timerDisplay.textContent = `Tempo Restante: ${timeLeft}s`;
+        if (timeLeft <= 0) {
+            endGame();
+        }
+    }, 1000);
+}
+
+function endGame() {
+    gameActive = false;
+    finalScore.textContent = score;
+    document.getElementById('gameOver').classList.remove('hidden');
+    gsap.from('#gameOver', { opacity: 0, scale: 0.8, duration: 1.2, ease: 'elastic.out(1, 0.3)' });
+}
+
+document.getElementById('restartGame').addEventListener('click', () => {
+    hearts = [];
+    powerUps = [];
+    score = 0;
+    timeLeft = 60;
+    level = 1;
+    gameActive = true;
+    scoreDisplay.textContent = `Corações Coletados: 0 / ${maxScore}`;
+    timerDisplay.textContent = `Tempo Restante: 60s`;
+    levelDisplay.textContent = `Nível: 1`;
+    document.getElementById('gameOver').classList.add('hidden');
+    startTimer();
+    animate();
+});
+
+// Iniciar o Jogo
+setInterval(addHeart, 800);
+setInterval(addPowerUp, 5000);
+startTimer();
+animate();

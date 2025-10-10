@@ -3,126 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Uma celebração interativa e romântica de um ano de namoro, com memórias, fotos, um jogo e planos para o futuro.">
-    <meta name="keywords" content="aniversário de namoro, amor, celebração, memórias, jogo">
-    <title>Um Ano de Nós Dois - Uma Jornada de Amor</title>
+    <meta name="description" content="Uma celebração interativa e romântica de um ano de namoro, com memórias, fotos, jogo, planos e mais.">
+    <meta name="keywords" content="aniversário de namoro, amor, celebração, memórias, jogo, quotes">
+    <title>Um Ano de Nós Dois - Uma Jornada de Amor Eterno</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            overflow-x: hidden;
-        }
-        h1, h2, h3 {
-            font-family: 'Playfair Display', serif;
-        }
-        .parallax-bg {
-            background-attachment: fixed;
-            background-size: cover;
-            background-position: center;
-        }
-        .timeline::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            width: 4px;
-            background: linear-gradient(to bottom, #f472b6, #f9a8d4);
-            transform: translateX(-50%);
-        }
-        .timeline-item {
-            position: relative;
-            width: 45%;
-            padding: 1.5rem;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-        .timeline-item.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .timeline-item:nth-child(odd) {
-            left: 0;
-            text-align: right;
-        }
-        .timeline-item:nth-child(even) {
-            left: 55%;
-            text-align: left;
-        }
-        .timeline-dot {
-            position: absolute;
-            top: 2rem;
-            width: 1.5rem;
-            height: 1.5rem;
-            background: #ec4899;
-            border: 3px solid #fff;
-            border-radius: 50%;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        }
-        .timeline-item:nth-child(odd) .timeline-dot {
-            right: -0.75rem;
-        }
-        .timeline-item:nth-child(even) .timeline-dot {
-            left: -0.75rem;
-        }
-        .swiper-slide img {
-            transition: transform 0.3s ease;
-        }
-        .swiper-slide img:hover {
-            transform: scale(1.05);
-        }
-        .heart {
-            position: absolute;
-            cursor: pointer;
-            font-size: 2rem;
-            color: #ec4899;
-            user-select: none;
-        }
-        .heart-message {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 1rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-        .heart-message.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        @media (max-width: 768px) {
-            .timeline::before {
-                left: 1.5rem;
-            }
-            .timeline-item {
-                width: 100%;
-                left: 0 !important;
-                text-align: left !important;
-                padding-left: 4rem;
-            }
-            .timeline-dot {
-                left: 0.75rem !important;
-                right: auto !important;
-            }
-            .parallax-bg {
-                background-attachment: scroll;
-            }
-        }
-    </style>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-gray-100 text-gray-800">
+<body class="text-gray-800">
+    <!-- Partículas de Fundo -->
+    <div id="particles-js"></div>
+
+    <!-- Toggle Dark Mode -->
+    <div class="fixed top-4 right-4 z-50">
+        <button id="darkModeToggle" class="bg-pink-500 text-white p-3 rounded-full shadow-lg hover:bg-pink-600 transition">
+            <svg id="lightIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+            </svg>
+            <svg id="darkIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+            </svg>
+        </button>
+    </div>
+
     <!-- Música de Fundo (Opcional) -->
-    <audio id="backgroundMusic" loop>
-        <source src="https://www.bensound.com/bensound-music/bensound-sweet.mp3" type="audio/mp3">
-        Seu navegador não suporta áudio.
-    </audio>
+    <iframe id="backgroundMusic" src="https://www.youtube.com/embed/aOkiG53ituQ?autoplay=1&loop=1&playlist=aOkiG53ituQ" style="display:none;" allow="autoplay"></iframe>
     <div class="fixed bottom-4 right-4 z-50">
         <button id="musicToggle" class="bg-pink-500 text-white p-3 rounded-full shadow-lg hover:bg-pink-600 transition">
             <svg id="playIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -136,14 +45,15 @@
     </div>
 
     <!-- Navegação -->
-    <nav class="bg-pink-700 text-white shadow-lg sticky top-0 z-20">
+    <nav class="bg-pink-700 text-white shadow-lg sticky top-0 z-20 transition-colors duration-500">
         <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="#" class="text-3xl font-bold">Um Ano de Amor</a>
+            <a href="#" class="text-3xl font-bold cursive">Um Ano de Amor</a>
             <ul class="flex space-x-8 text-lg">
                 <li><a href="#hero" class="hover:text-pink-200 transition">Início</a></li>
                 <li><a href="#mensagem" class="hover:text-pink-200 transition">Mensagem</a></li>
                 <li><a href="#jornada" class="hover:text-pink-200 transition">Jornada</a></li>
                 <li><a href="#galeria" class="hover:text-pink-200 transition">Galeria</a></li>
+                <li><a href="#quotes" class="hover:text-pink-200 transition">Quotes</a></li>
                 <li><a href="#jogo" class="hover:text-pink-200 transition">Jogo</a></li>
                 <li><a href="#futuro" class="hover:text-pink-200 transition">Futuro</a></li>
             </ul>
@@ -152,88 +62,115 @@
 
     <!-- Hero Section com Parallax -->
     <header id="hero" class="relative h-screen flex items-center justify-center bg-cover bg-center parallax-bg" style="background-image: url('https://via.placeholder.com/1920x1080?text=Nosso+Amor');">
-        <div class="absolute inset-0 bg-black opacity-50"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-black/60 to-transparent"></div>
         <div class="relative z-10 text-center text-white">
-            <h1 class="text-6xl md:text-8xl font-bold mb-6 animate-pulse">Um Ano de Nós Dois</h1>
-            <p class="text-2xl md:text-4xl mb-8">Uma história de amor escrita com o coração</p>
-            <a href="#mensagem" class="bg-pink-500 hover:bg-pink-600 text-white px-8 py-4 rounded-full text-lg font-semibold transition">Explore Nossa Jornada</a>
+            <h1 class="text-6xl md:text-8xl font-bold mb-6 animate-pulse cursive">Um Ano de Nós Dois</h1>
+            <p class="text-2xl md:text-4xl mb-8">Uma jornada de amor, memórias e sonhos eternos</p>
+            <a href="#mensagem" class="bg-pink-500 hover:bg-pink-600 text-white px-8 py-4 rounded-full text-lg font-semibold transition shadow-md">Descubra Mais</a>
+            <div id="daysTogether" class="mt-4 text-xl">Dias Juntos: Calculando...</div>
         </div>
     </header>
 
     <!-- Mensagem Principal -->
     <section id="mensagem" class="max-w-5xl mx-auto py-20 px-6">
-        <h2 class="text-5xl font-bold text-pink-800 text-center mb-10">Uma Carta para Você</h2>
-        <div class="bg-white p-10 rounded-2xl shadow-2xl animate-slide-up">
-            <p class="text-lg leading-relaxed text-gray-700">
-                Meu amor, há um ano, nossas almas se encontraram e decidiram nunca mais se separar. Cada dia ao seu lado é um capítulo de uma história épica, cheia de risadas, sonhos e promessas. Este site é mais do que uma celebração: é um testemunho do nosso amor, das memórias que construímos e dos infinitos momentos que ainda viveremos juntos. Você é meu lar, minha paz e minha maior aventura. Te amo hoje e sempre.
+        <h2 class="text-5xl font-bold text-pink-800 text-center mb-10 cursive dark:text-purple-300">Uma Carta para Você</h2>
+        <div class="bg-white p-10 rounded-2xl shadow-2xl animate-slide-up dark:bg-gray-800">
+            <p class="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
+                Meu amor, há um ano, nossas vidas se entrelaçaram em um laço eterno de afeto e paixão. Cada instante ao seu lado é uma sinfonia de emoções, cheia de risos, abraços e promessas sussurradas ao vento. Este site é um tributo ao nosso amor, às aventuras compartilhadas e aos sonhos que ainda vamos realizar. Você é a estrela que ilumina meu caminho, minha fonte de inspiração infinita. Te amo além das palavras, para sempre e mais um dia.
             </p>
-            <p class="text-right mt-6 text-pink-600 font-semibold">— Para sempre seu</p>
+            <p class="text-right mt-6 text-pink-600 font-semibold dark:text-purple-400">— Seu eterno admirador</p>
         </div>
     </section>
 
-    <!-- Linha do Tempo -->
-    <section id="jornada" class="relative py-20 bg-gradient-to-b from-pink-50 to-white">
-        <h2 class="text-5xl font-bold text-pink-800 text-center mb-12">Nossa História</h2>
+    <!-- Linha do Tempo Expandida -->
+    <section id="jornada" class="relative py-20 bg-gradient-to-b from-pink-50 to-white dark:bg-gradient-to-b from-purple-900 to-gray-900">
+        <h2 class="text-5xl font-bold text-pink-800 text-center mb-12 cursive dark:text-purple-300">Nossa História</h2>
         <div class="timeline max-w-5xl mx-auto relative space-y-16">
             <!-- Momento 1 -->
             <div class="timeline-item">
                 <div class="timeline-dot"></div>
-                <div class="bg-white p-8 rounded-xl shadow-lg">
-                    <h3 class="text-2xl font-semibold text-pink-600">Outubro 2024: O Primeiro Encontro</h3>
-                    <p class="text-gray-600 mt-3">Um café, um sorriso tímido e a certeza de que algo especial estava começando.</p>
+                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition dark:bg-gray-800">
+                    <h3 class="text-2xl font-semibold text-pink-600 dark:text-purple-400">Novembro 2024: O Primeiro Encontro</h3>
+                    <p class="text-gray-600 mt-3 dark:text-gray-300">Um café simples que se transformou no início de uma grande história de amor.</p>
                 </div>
-                <p class="text-sm text-gray-500 mt-2">09/10/2024</p>
+                <p class="text-sm text-gray-500 mt-2 dark:text-gray-400">09/11/2024</p>
             </div>
             <!-- Momento 2 -->
             <div class="timeline-item">
                 <div class="timeline-dot"></div>
-                <div class="bg-white p-8 rounded-xl shadow-lg">
-                    <h3 class="text-2xl font-semibold text-pink-600">Dezembro 2024: Primeiro Natal</h3>
-                    <p class="text-gray-600 mt-3">As luzes da árvore brilhavam, mas nada superava o brilho do seu olhar.</p>
+                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition dark:bg-gray-800">
+                    <h3 class="text-2xl font-semibold text-pink-600 dark:text-purple-400">Dezembro 2024: Primeira Declaração</h3>
+                    <p class="text-gray-600 mt-3 dark:text-gray-300">As palavras "Eu te amo" ecoaram pela primeira vez, selando nosso compromisso.</p>
                 </div>
-                <p class="text-sm text-gray-500 mt-2">25/12/2024</p>
+                <p class="text-sm text-gray-500 mt-2 dark:text-gray-400">15/12/2024</p>
             </div>
             <!-- Momento 3 -->
             <div class="timeline-item">
                 <div class="timeline-dot"></div>
-                <div class="bg-white p-8 rounded-xl shadow-lg">
-                    <h3 class="text-2xl font-semibold text-pink-600">Março 2025: Nossa Primeira Viagem</h3>
-                    <p class="text-gray-600 mt-3">Estradas, risadas e paisagens que nunca esqueceremos.</p>
+                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition dark:bg-gray-800">
+                    <h3 class="text-2xl font-semibold text-pink-600 dark:text-purple-400">Dezembro 2024: Primeiro Natal</h3>
+                    <p class="text-gray-600 mt-3 dark:text-gray-300">Celebração mágica com luzes, presentes e o calor do nosso abraço.</p>
                 </div>
-                <p class="text-sm text-gray-500 mt-2">15/03/2025</p>
+                <p class="text-sm text-gray-500 mt-2 dark:text-gray-400">25/12/2024</p>
             </div>
             <!-- Momento 4 -->
             <div class="timeline-item">
                 <div class="timeline-dot"></div>
-                <div class="bg-white p-8 rounded-xl shadow-lg">
-                    <h3 class="text-2xl font-semibold text-pink-600">Outubro 2025: Um Ano de Amor</h3>
-                    <p class="text-gray-600 mt-3">Hoje, celebramos um ano de memórias e o começo de uma eternidade juntos.</p>
+                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition dark:bg-gray-800">
+                    <h3 class="text-2xl font-semibold text-pink-600 dark:text-purple-400">Fevereiro 2025: Dia dos Namorados</h3>
+                    <p class="text-gray-600 mt-3 dark:text-gray-300">Um jantar romântico sob as estrelas, cheio de promessas para o futuro.</p>
                 </div>
-                <p class="text-sm text-gray-500 mt-2">09/10/2025</p>
+                <p class="text-sm text-gray-500 mt-2 dark:text-gray-400">14/02/2025</p>
+            </div>
+            <!-- Momento 5 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition dark:bg-gray-800">
+                    <h3 class="text-2xl font-semibold text-pink-600 dark:text-purple-400">Março 2025: Nossa Primeira Viagem</h3>
+                    <p class="text-gray-600 mt-3 dark:text-gray-300">Explorando novos lugares, criando memórias que durarão para sempre.</p>
+                </div>
+                <p class="text-sm text-gray-500 mt-2 dark:text-gray-400">15/03/2025</p>
+            </div>
+            <!-- Momento 6 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition dark:bg-gray-800">
+                    <h3 class="text-2xl font-semibold text-pink-600 dark:text-purple-400">Novembro 2025: Um Ano de Amor</h3>
+                    <p class="text-gray-600 mt-3 dark:text-gray-300">Celebrando 365 dias de felicidade e o início de muitos mais anos juntos.</p>
+                </div>
+                <p class="text-sm text-gray-500 mt-2 dark:text-gray-400">09/11/2025</p>
             </div>
         </div>
     </section>
 
-    <!-- Galeria de Fotos com Carrossel -->
-    <section id="galeria" class="py-20 bg-white">
-        <h2 class="text-5xl font-bold text-pink-800 text-center mb-12">Nossos Momentos</h2>
-        <div class="swiper max-w-5xl mx-auto">
+    <!-- Galeria de Fotos com Carrossel Expandida -->
+    <section id="galeria" class="py-20 bg-white dark:bg-gray-800">
+        <h2 class="text-5xl font-bold text-pink-800 text-center mb-12 cursive dark:text-purple-300">Nossos Momentos Capturados</h2>
+        <div class="swiper max-w-6xl mx-auto">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
                     <img src="https://via.placeholder.com/800x500?text=Momento+1" alt="Momento 1" class="w-full h-96 object-cover rounded-lg shadow-lg">
-                    <p class="text-center mt-4 text-gray-600">Nosso primeiro encontro</p>
+                    <p class="text-center mt-4 text-gray-600 dark:text-gray-300">Nosso primeiro encontro</p>
                 </div>
                 <div class="swiper-slide">
                     <img src="https://via.placeholder.com/800x500?text=Momento+2" alt="Momento 2" class="w-full h-96 object-cover rounded-lg shadow-lg">
-                    <p class="text-center mt-4 text-gray-600">Natal mágico</p>
+                    <p class="text-center mt-4 text-gray-600 dark:text-gray-300">Declaração de amor</p>
                 </div>
                 <div class="swiper-slide">
                     <img src="https://via.placeholder.com/800x500?text=Momento+3" alt="Momento 3" class="w-full h-96 object-cover rounded-lg shadow-lg">
-                    <p class="text-center mt-4 text-gray-600">Aventura na viagem</p>
+                    <p class="text-center mt-4 text-gray-600 dark:text-gray-300">Natal mágico</p>
                 </div>
                 <div class="swiper-slide">
                     <img src="https://via.placeholder.com/800x500?text=Momento+4" alt="Momento 4" class="w-full h-96 object-cover rounded-lg shadow-lg">
-                    <p class="text-center mt-4 text-gray-600">Um ano de amor</p>
+                    <p class="text-center mt-4 text-gray-600 dark:text-gray-300">Dia dos Namorados</p>
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://via.placeholder.com/800x500?text=Momento+5" alt="Momento 5" class="w-full h-96 object-cover rounded-lg shadow-lg">
+                    <p class="text-center mt-4 text-gray-600 dark:text-gray-300">Viagem inesquecível</p>
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://via.placeholder.com/800x500?text=Momento+6" alt="Momento 6" class="w-full h-96 object-cover rounded-lg shadow-lg">
+                    <p class="text-center mt-4 text-gray-600 dark:text-gray-300">Um ano de amor</p>
                 </div>
             </div>
             <div class="swiper-button-prev"></div>
@@ -242,220 +179,103 @@
         </div>
     </section>
 
-    <!-- Jogo de Corações -->
-    <section id="jogo" class="py-20 bg-gradient-to-b from-pink-50 to-white">
-        <h2 class="text-5xl font-bold text-pink-800 text-center mb-12">Caça aos Corações</h2>
-        <div class="max-w-5xl mx-auto bg-white p-8 rounded-2xl shadow-2xl relative">
+    <!-- Seção de Quotes de Amor -->
+    <section id="quotes" class="py-20 bg-gradient-to-b from-pink-50 to-white dark:bg-gradient-to-b from-purple-900 to-gray-900">
+        <h2 class="text-5xl font-bold text-pink-800 text-center mb-12 cursive dark:text-purple-300">Quotes que Inspiram Nosso Amor</h2>
+        <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 px-6">
+            <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition dark:bg-gray-800">
+                <p class="text-gray-600 italic dark:text-gray-300">"O amor não é algo que você olha e diz: 'Eu quero isso'. O amor é algo que você sente e diz: 'Eu preciso disso'."</p>
+                <p class="text-right mt-4 text-pink-600 font-semibold dark:text-purple-400">— Anônimo</p>
+            </div>
+            <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition dark:bg-gray-800">
+                <p class="text-gray-600 italic dark:text-gray-300">"Você é a melhor coisa que já me aconteceu."</p>
+                <p class="text-right mt-4 text-pink-600 font-semibold dark:text-purple-400">— Anônimo</p>
+            </div>
+            <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition dark:bg-gray-800">
+                <p class="text-gray-600 italic dark:text-gray-300">"No seu sorriso, eu encontro meu paraíso."</p>
+                <p class="text-right mt-4 text-pink-600 font-semibold dark:text-purple-400">— Anônimo</p>
+            </div>
+            <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition dark:bg-gray-800">
+                <p class="text-gray-600 italic dark:text-gray-300">"Te amar é a melhor aventura da minha vida."</p>
+                <p class="text-right mt-4 text-pink-600 font-semibold dark:text-purple-400">— Anônimo</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Jogo de Corações Melhorado -->
+    <section id="jogo" class="py-20 bg-gradient-to-b from-pink-50 to-white dark:bg-gradient-to-b from-purple-900 to-gray-900">
+        <h2 class="text-5xl font-bold text-pink-800 text-center mb-12 cursive dark:text-purple-300">Caça aos Corações</h2>
+        <div id="gameContainer" class="max-w-5xl mx-auto relative">
             <canvas id="heartGame" class="w-full h-96 rounded-lg"></canvas>
-            <div id="gameOver" class="hidden absolute inset-0 flex items-center justify-center bg-black bg-opacity-75 text-white">
+            <div id="timerDisplay">Tempo Restante: 60s</div>
+            <div id="scoreDisplay">Corações Coletados: 0 / 15</div>
+            <div id="levelDisplay">Nível: 1</div>
+            <div id="gameOver" class="hidden absolute inset-0 flex items-center justify-center bg-black bg-opacity-75 text-white rounded-lg">
                 <div class="text-center">
-                    <h3 class="text-3xl font-bold text-pink-400 mb-4">Você coletou todos os corações!</h3>
-                    <p class="text-lg">Nosso amor é como esses corações: infinito e sempre brilhando. ❤️</p>
+                    <h3 class="text-3xl font-bold text-pink-400 mb-4">Fim do Jogo!</h3>
+                    <p class="text-lg">Pontuação: <span id="finalScore">0</span> / 15</p>
+                    <p class="text-lg">Nosso amor vence qualquer desafio! ❤️</p>
                     <button id="restartGame" class="mt-6 bg-pink-500 hover:bg-pink-600 text-white px-8 py-3 rounded-full text-lg transition">Jogar Novamente</button>
                 </div>
             </div>
-            <p class="text-center mt-4 text-gray-600">Clique nos corações para revelar mensagens de amor!</p>
         </div>
+        <p class="text-center mt-4 text-gray-600 dark:text-gray-300">Clique nos corações flutuantes para revelar mensagens de amor antes que o tempo acabe! Colete power-ups para tempo extra.</p>
     </section>
 
-    <!-- Planos para o Futuro -->
-    <section id="futuro" class="py-20 bg-gradient-to-b from-white to-pink-50">
-        <h2 class="text-5xl font-bold text-pink-800 text-center mb-12">Nosso Futuro Juntos</h2>
+    <!-- Planos para o Futuro Expandida -->
+    <section id="futuro" class="py-20 bg-gradient-to-b from-white to-pink-50 dark:bg-gradient-to-b from-gray-900 to-purple-900">
+        <h2 class="text-5xl font-bold text-pink-800 text-center mb-12 cursive dark:text-purple-300">Nosso Futuro Juntos</h2>
         <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-6">
-            <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition">
-                <h3 class="text-2xl font-semibold text-pink-600 mb-4">Viagens dos Sonhos</h3>
-                <p class="text-gray-600">Explorar o mundo, de Paris a Bali, com você ao meu lado.</p>
+            <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition dark:bg-gray-800">
+                <h3 class="text-2xl font-semibold text-pink-600 mb-4 dark:text-purple-400">Viagens dos Sonhos</h3>
+                <p class="text-gray-600 dark:text-gray-300">Explorar Paris, Bali e outros paraísos, criando mais memórias inesquecíveis.</p>
             </div>
-            <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition">
-                <h3 class="text-2xl font-semibold text-pink-600 mb-4">Nossos Projetos</h3>
-                <p class="text-gray-600">Construir uma vida juntos, com metas compartilhadas e apoio mútuo.</p>
+            <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition dark:bg-gray-800">
+                <h3 class="text-2xl font-semibold text-pink-600 mb-4 dark:text-purple-400">Nossos Projetos Profissionais</h3>
+                <p class="text-gray-600 dark:text-gray-300">Crescer juntos, apoiando um ao outro em carreiras e ambições pessoais.</p>
             </div>
-            <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition">
-                <h3 class="text-2xl font-semibold text-pink-600 mb-4">Um Lar Nosso</h3>
-                <p class="text-gray-600">Um espaço cheio de amor, risadas e memórias para chamar de nosso.</p>
+            <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition dark:bg-gray-800">
+                <h3 class="text-2xl font-semibold text-pink-600 mb-4 dark:text-purple-400">Construir um Lar</h3>
+                <p class="text-gray-600 dark:text-gray-300">Um espaço acolhedor cheio de amor, risadas e talvez uma família no futuro.</p>
+            </div>
+            <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition dark:bg-gray-800">
+                <h3 class="text-2xl font-semibold text-pink-600 mb-4 dark:text-purple-400">Aventuras Diárias</h3>
+                <p class="text-gray-600 dark:text-gray-300">Transformar rotinas em momentos especiais, como jantares surpresa e passeios.</p>
+            </div>
+            <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition dark:bg-gray-800">
+                <h3 class="text-2xl font-semibold text-pink-600 mb-4 dark:text-purple-400">Crescimento Espiritual</h3>
+                <p class="text-gray-600 dark:text-gray-300">Explorar juntos o mundo interior, meditando e compartilhando sonhos profundos.</p>
+            </div>
+            <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition dark:bg-gray-800">
+                <h3 class="text-2xl font-semibold text-pink-600 mb-4 dark:text-purple-400">Eternidade de Amor</h3>
+                <p class="text-gray-600 dark:text-gray-300">Planejar uma vida inteira de cumplicidade, amor e apoio mútuo.</p>
             </div>
         </div>
     </section>
 
-    <!-- Surpresa Interativa -->
+    <!-- Surpresa Interativa Expandida -->
     <section class="text-center py-20">
-        <button id="loveButton" class="bg-pink-500 hover:bg-pink-600 text-white px-10 py-4 rounded-full text-xl font-semibold transition">Uma Surpresa para Você</button>
-        <div id="surpriseMessage" class="mt-10 max-w-3xl mx-auto bg-white p-10 rounded-2xl shadow-2xl hidden">
-            <h3 class="text-3xl font-bold text-pink-700 mb-4">Você é Meu Tudo</h3>
-            <p class="text-lg text-gray-700">Cada batida do meu coração é por você. Que nosso amor continue crescendo, iluminando cada canto da nossa vida. Te amo para sempre! ❤️</p>
+        <button id="loveButton" class="bg-pink-500 hover:bg-pink-600 text-white px-10 py-4 rounded-full text-xl font-semibold transition shadow-md dark:bg-purple-500 dark:hover:bg-purple-600">Uma Surpresa Especial para Você</button>
+        <div id="surpriseMessage" class="mt-10 max-w-3xl mx-auto bg-white p-10 rounded-2xl shadow-2xl hidden dark:bg-gray-800">
+            <h3 class="text-3xl font-bold text-pink-700 mb-4 dark:text-purple-300">Você é o Centro do Meu Universo</h3>
+            <p class="text-lg text-gray-700 dark:text-gray-300">Cada momento com você é um tesouro. Que nosso amor brilhe para sempre como as estrelas. Te amo eternamente! ❤️</p>
+            <div class="mt-4">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Vídeo Surpresa" frameborder="0" allowfullscreen></iframe>
+            </div>
         </div>
     </section>
 
-    <!-- Rodapé -->
-    <footer class="bg-pink-700 text-white py-12">
+    <!-- Rodapé Expandido -->
+    <footer class="bg-pink-700 text-white py-12 dark:bg-purple-900">
         <div class="max-w-7xl mx-auto px-6 text-center">
-            <p class="text-xl">Feito com todo o amor do mundo para celebrar nosso primeiro ano juntos</p>
-            <p class="mt-4 text-sm">© 2025 - Uma história de amor eterno</p>
+            <p class="text-xl cursive">Feito com amor infinito para celebrar nosso primeiro ano e muitos mais</p>
+            <p class="mt-4 text-sm">© 2025 - Nossa história de amor continua...</p>
+            <div class="mt-4">
+                <a href="mailto:seuemail@example.com" class="text-pink-200 hover:text-white">Envie uma mensagem de amor</a>
+            </div>
         </div>
     </footer>
 
-    <!-- JavaScript -->
-    <script>
-        // Inicializar GSAP para animações
-        gsap.registerPlugin();
-        gsap.from('#hero h1', { duration: 1.5, y: 50, opacity: 0, ease: 'power2.out', delay: 0.5 });
-        gsap.from('#hero p', { duration: 1.5, y: 50, opacity: 0, ease: 'power2.out', delay: 0.8 });
-        gsap.from('#hero a', { duration: 1.5, y: 50, opacity: 0, ease: 'power2.out', delay: 1 });
-
-        // Animação da timeline
-        const timelineItems = document.querySelectorAll('.timeline-item');
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    gsap.from(entry.target, { duration: 1, y: 50, opacity: 0, ease: 'power2.out' });
-                }
-            });
-        }, { threshold: 0.2 });
-        timelineItems.forEach(item => observer.observe(item));
-
-        // Inicializar Swiper para carrossel
-        const swiper = new Swiper('.swiper', {
-            loop: true,
-            autoplay: { delay: 5000 },
-            pagination: { el: '.swiper-pagination', clickable: true },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            breakpoints: {
-                640: { slidesPerView: 1 },
-                768: { slidesPerView: 2, spaceBetween: 20 },
-                1024: { slidesPerView: 3, spaceBetween: 30 },
-            }
-        });
-
-        // Controle de música
-        const music = document.getElementById('backgroundMusic');
-        const musicToggle = document.getElementById('musicToggle');
-        const playIcon = document.getElementById('playIcon');
-        const pauseIcon = document.getElementById('pauseIcon');
-        musicToggle.addEventListener('click', () => {
-            if (music.paused) {
-                music.play();
-                playIcon.classList.add('hidden');
-                pauseIcon.classList.remove('hidden');
-            } else {
-                music.pause();
-                playIcon.classList.remove('hidden');
-                pauseIcon.classList.add('hidden');
-            }
-        });
-
-        // Botão de surpresa
-        document.getElementById('loveButton').addEventListener('click', () => {
-            const message = document.getElementById('surpriseMessage');
-            message.classList.toggle('hidden');
-            if (!message.classList.contains('hidden')) {
-                gsap.from('#surpriseMessage', { duration: 1, scale: 0.8, opacity: 0, ease: 'back.out(1.7)' });
-            }
-        });
-
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // Jogo de Corações
-        const canvas = document.getElementById('heartGame');
-        const ctx = canvas.getContext('2d');
-        canvas.width = canvas.offsetWidth;
-        canvas.height = canvas.offsetHeight;
-
-        const messages = [
-            'Você é a razão do meu sorriso!',
-            'Meu coração bate por você.',
-            'Te amo mais a cada dia.',
-            'Você é meu lar.',
-            'Juntos, somos imbatíveis!'
-        ];
-        let hearts = [];
-        let score = 0;
-        const maxHearts = 10;
-        let gameActive = true;
-
-        class Heart {
-            constructor() {
-                this.x = Math.random() * (canvas.width - 50);
-                this.y = Math.random() * (canvas.height - 50);
-                this.message = messages[Math.floor(Math.random() * messages.length)];
-                this.id = Date.now() + Math.random();
-            }
-
-            draw() {
-                ctx.font = '30px Poppins';
-                ctx.fillStyle = '#ec4899';
-                ctx.fillText('❤️', this.x, this.y);
-            }
-        }
-
-        function addHeart() {
-            if (gameActive && hearts.length < 3) {
-                hearts.push(new Heart());
-            }
-        }
-
-        function animate() {
-            if (!gameActive) return;
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            hearts.forEach(heart => heart.draw());
-            requestAnimationFrame(animate);
-        }
-
-        function showMessage(x, y, message) {
-            const messageDiv = document.createElement('div');
-            messageDiv.className = 'heart-message';
-            messageDiv.textContent = message;
-            messageDiv.style.left = `${x}px`;
-            messageDiv.style.top = `${y}px`;
-            canvas.parentElement.appendChild(messageDiv);
-            gsap.to(messageDiv, { opacity: 1, y: 0, duration: 0.5, onComplete: () => {
-                gsap.to(messageDiv, { opacity: 0, duration: 0.5, delay: 1, onComplete: () => messageDiv.remove() });
-            } });
-        }
-
-        canvas.addEventListener('click', (e) => {
-            if (!gameActive) return;
-            const rect = canvas.getBoundingClientRect();
-            const clickX = e.clientX - rect.left;
-            const clickY = e.clientY - rect.top;
-
-            hearts = hearts.filter(heart => {
-                if (Math.abs(heart.x - clickX) < 30 && Math.abs(heart.y - clickY) < 30) {
-                    showMessage(clickX, clickY, heart.message);
-                    score++;
-                    if (score >= maxHearts) {
-                        gameActive = false;
-                        document.getElementById('gameOver').classList.remove('hidden');
-                        gsap.from('#gameOver', { opacity: 0, scale: 0.8, duration: 1, ease: 'back.out(1.7)' });
-                    }
-                    return false;
-                }
-                return true;
-            });
-        });
-
-        document.getElementById('restartGame').addEventListener('click', () => {
-            hearts = [];
-            score = 0;
-            gameActive = true;
-            document.getElementById('gameOver').classList.add('hidden');
-            animate();
-        });
-
-        // Iniciar o jogo
-        setInterval(addHeart, 2000);
-        animate();
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
