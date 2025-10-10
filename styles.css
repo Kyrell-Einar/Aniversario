@@ -11,12 +11,20 @@ body {
     font-size: 18px;
     line-height: 1.6;
     transition: background-color 0.3s, color 0.3s;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
+    min-height: 100vh;
 }
 
 .light-mode {
     background-color: #fff;
     color: #001f3f;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
 header {
@@ -76,8 +84,7 @@ nav ul li a:hover {
 }
 
 section {
-    max-width: 800px;
-    margin: 20px auto;
+    margin: 20px 0;
     padding: 20px;
 }
 
@@ -315,6 +322,9 @@ button:not(.delete-btn):not(.game-heart):not(.modal-close):not(.modal-extra):hov
     }
     #modal-message {
         font-size: 1.2em;
+    }
+    .container {
+        padding: 10px;
     }
 }
 
