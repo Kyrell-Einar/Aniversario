@@ -16,10 +16,14 @@ const list = document.getElementById('recados-list');
 function loadRecados() {
     const recados = JSON.parse(localStorage.getItem('recados')) || [];
     list.innerHTML = '';
-    recados.forEach(recado => {
+    recados.forEach((recado, index) => {
         const div = document.createElement('div');
         div.classList.add('recado');
-        div.innerHTML = `<h3>${recado.titulo}</h3><p>${recado.mensagem}</p>`;
+        div.innerHTML = `
+            <h3>${recado.titulo}</h3>
+            <p>${recado.mensagem}</p>
+            <button class="delete-btn" onclick="deleteRecado(${index})" aria-label="Apagar recado">Apagar</button>
+        `;
         list.appendChild(div);
     });
 }
@@ -34,6 +38,16 @@ form.addEventListener('submit', (e) => {
     loadRecados();
     form.reset();
 });
+
+// Função para apagar recado com confirmação
+function deleteRecado(index) {
+    if (confirm("Tem certeza que deseja apagar este recado?")) {
+        const recados = JSON.parse(localStorage.getItem('recados')) || [];
+        recados.splice(index, 1); // Remove o recado no índice especificado
+        localStorage.setItem('recados', JSON.stringify(recados));
+        loadRecados(); // Atualiza a lista
+    }
+}
 
 // Animação de Corações
 function createHeart() {
