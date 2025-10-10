@@ -73,8 +73,8 @@ const messages = [
 function startGame() {
     const gameHeart = document.createElement('div');
     gameHeart.classList.add('game-heart');
-    gameHeart.style.left = Math.random() * (window.innerWidth - 30) + 'px';
-    gameHeart.style.top = Math.random() * (window.innerHeight - 30) + 'px';
+    gameHeart.style.left = Math.random() * (window.innerWidth - 35) + 'px';
+    gameHeart.style.top = Math.random() * (window.innerHeight - 35) + 'px';
     gameHeart.addEventListener('click', () => {
         const modal = document.getElementById('modal');
         const message = document.getElementById('modal-message');
@@ -94,6 +94,7 @@ function closeModal() {
     document.getElementById('modal').style.display = 'none';
 }
 
+// Fechar modal com tecla Enter ou Esc
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === 'Escape') {
         closeModal();

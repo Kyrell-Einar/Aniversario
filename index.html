@@ -16,7 +16,7 @@
             font-family: 'Dancing Script', cursive;
             background-color: #001f3f; /* Azul noite */
             color: #f0f0f0; /* Cinza claro para modo escuro */
-            font-size: 18px; /* Aumentado para legibilidade */
+            font-size: 18px; /* Base para legibilidade */
             line-height: 1.6;
             transition: background-color 0.3s, color 0.3s;
         }
@@ -32,10 +32,10 @@
             position: relative;
         }
         h1 {
-            font-size: 3em; /* Aumentado */
+            font-size: 3em;
         }
         h2 {
-            font-size: 2.2em; /* Aumentado */
+            font-size: 2.2em;
         }
         nav {
             display: none;
@@ -54,7 +54,7 @@
         nav ul li a {
             color: #001f3f;
             text-decoration: none;
-            font-size: 1.4em; /* Aumentado */
+            font-size: 1.4em;
         }
         nav ul li a:hover {
             text-decoration: underline;
@@ -62,13 +62,13 @@
         .menu-toggle {
             cursor: pointer;
             font-size: 30px;
-            color: #f0f0f0; /* Mesma cor do texto no modo escuro */
+            color: #f0f0f0;
             position: absolute;
             top: 20px;
             right: 20px;
         }
         .light-mode .menu-toggle {
-            color: #001f3f; /* Ajuste no modo claro */
+            color: #001f3f;
         }
         section {
             max-width: 800px;
@@ -77,27 +77,27 @@
         }
         .memory, .recado, .citacao {
             background: #ff69b4;
-            color: #001f3f; /* Azul escuro para contraste com fundo rosa */
+            color: #001f3f; /* Azul escuro para contraste */
             padding: 15px;
             margin: 10px 0;
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
         .memory p, .recado p, .citacao p {
-            font-size: 1.2em; /* Aumentado para legibilidade */
+            font-size: 1.2em;
         }
         .memory h3, .recado h3 {
-            font-size: 1.8em; /* Aumentado */
+            font-size: 1.8em;
         }
         .recado {
             position: relative;
-            padding-bottom: 40px; /* Espaço para o botão de apagar */
+            padding-bottom: 40px;
         }
         .delete-btn {
             position: absolute;
             bottom: 10px;
             right: 10px;
-            background-color: #ff4444; /* Vermelho para exclusão */
+            background-color: #ff4444;
             color: #fff;
             border: none;
             padding: 5px 10px;
@@ -119,11 +119,11 @@
             border: none;
             border-radius: 5px;
             font-family: Arial, sans-serif;
-            font-size: 1.1em; /* Aumentado */
+            font-size: 1.1em;
         }
         button:not(.delete-btn):not(.game-heart):not(.modal-close) {
             background-color: #001f3f;
-            color: #f0f0f0; /* Melhor contraste */
+            color: #f0f0f0;
             cursor: pointer;
             transition: background-color 0.3s;
         }
@@ -135,7 +135,7 @@
             background-color: #ff69b4;
             color: #001f3f;
         }
-        /* Animação de corações decorativos */
+        /* Corações decorativos */
         .heart {
             position: fixed;
             width: 20px;
@@ -178,27 +178,27 @@
         }
         .game-heart {
             position: fixed;
-            width: 30px;
-            height: 30px;
-            background: #ff69b4;
+            width: 35px; /* Aumentado para visibilidade */
+            height: 35px;
+            background: #c71585; /* Vermelho escuro para destacar */
             transform: rotate(-45deg);
             cursor: pointer;
-            z-index: 10;
+            z-index: 500; /* Acima de outros elementos, exceto modal */
         }
         .game-heart::before, .game-heart::after {
             content: '';
             position: absolute;
-            width: 30px;
-            height: 30px;
-            background: #ff69b4;
+            width: 35px;
+            height: 35px;
+            background: #c71585;
             border-radius: 50%;
         }
         .game-heart::before {
-            top: -15px;
+            top: -17.5px;
             left: 0;
         }
         .game-heart::after {
-            left: 15px;
+            left: 17.5px;
             top: 0;
         }
         .modal {
@@ -209,17 +209,21 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.7);
-            z-index: 100;
+            z-index: 1000; /* Acima de tudo */
             justify-content: center;
             align-items: center;
         }
         .modal-content {
-            background: #fff;
+            background: #ffe4e1; /* Rosa claro para tema romântico */
+            color: #001f3f; /* Azul escuro para contraste */
             padding: 20px;
             border-radius: 8px;
             text-align: center;
             max-width: 80%;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        #modal-message {
+            font-size: 1.3em; /* Aumentado para legibilidade */
         }
         .modal-close {
             background-color: #ff69b4;
@@ -277,7 +281,7 @@
         <h2>Nossas Memórias</h2>
         <div class="memory">
             <h3>Nosso Primeiro Encontro</h3>
-            <p>Aquele dia em que nossos olhos se cruzaram e o mundo parou. Você ().</p>
+            <p>Aquele dia em que nossos olhos se cruzaram e o mundo parou. Você estava tão linda, e eu sabia que minha vida mudaria para sempre.</p>
         </div>
         <div class="memory">
             <h3>Viagem dos Sonhos</h3>
@@ -308,7 +312,7 @@
 
     <section id="minijogo">
         <h2>Minijogo Romântico</h2>
-        <p>Clique nos corações flutuantes para revelar mensagens especiais para você, Tata! 💖</p>
+        <p>Clique nos corações vermelhos para revelar mensagens especiais para você, Tata! 💖</p>
         <button onclick="startGame()" aria-label="Iniciar minijogo">Começar Jogo</button>
         <div id="modal" class="modal">
             <div class="modal-content">
@@ -394,8 +398,8 @@
         function startGame() {
             const gameHeart = document.createElement('div');
             gameHeart.classList.add('game-heart');
-            gameHeart.style.left = Math.random() * (window.innerWidth - 30) + 'px';
-            gameHeart.style.top = Math.random() * (window.innerHeight - 30) + 'px';
+            gameHeart.style.left = Math.random() * (window.innerWidth - 35) + 'px';
+            gameHeart.style.top = Math.random() * (window.innerHeight - 35) + 'px';
             gameHeart.addEventListener('click', () => {
                 const modal = document.getElementById('modal');
                 const message = document.getElementById('modal-message');
