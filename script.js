@@ -13,17 +13,6 @@ particlesJS('particles-js', {
     retina_detect: true
 });
 
-// Toggle Dark Mode
-const body = document.body;
-const darkModeToggle = document.getElementById('darkModeToggle');
-const lightIcon = document.getElementById('lightIcon');
-const darkIcon = document.getElementById('darkIcon');
-darkModeToggle.addEventListener('click', () => {
-    body.classList.toggle('dark');
-    lightIcon.classList.toggle('hidden');
-    darkIcon.classList.toggle('hidden');
-});
-
 // Toggle Mobile Navigation
 const navToggle = document.getElementById('navToggle');
 const navMenu = document.getElementById('navMenu');
@@ -37,19 +26,27 @@ const musicToggle = document.getElementById('musicToggle');
 const playIcon = document.getElementById('playIcon');
 const pauseIcon = document.getElementById('pauseIcon');
 let isPlaying = false;
-musicToggle.addEventListener('click', () => {
+
+function toggleMusic() {
     if (isPlaying) {
-        music.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":[]}', '*');
+        music.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
         playIcon.classList.remove('hidden');
         pauseIcon.classList.add('hidden');
         isPlaying = false;
     } else {
-        music.contentWindow.postMessage('{"event":"command","func":"playVideo","args":[]}', '*');
+        music.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
         playIcon.classList.add('hidden');
         pauseIcon.classList.remove('hidden');
         isPlaying = true;
     }
-});
+}
+
+musicToggle.addEventListener('click', toggleMusic);
+
+// Ensure YouTube API is ready
+window.onYouTubeIframeAPIReady = function() {
+    // No additional player initialization needed since we're using an iframe
+};
 
 // Contador de Dias Juntos
 const startDate = new Date('2024-11-09');
@@ -157,7 +154,7 @@ class Heart {
     }
     draw() {
         ctx.font = '40px Poppins';
-        ctx.fillStyle = body.classList.contains('dark') ? '#d946ef' : '#ec4899';
+        ctx.fillStyle = '#ec4899';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillText('❤️', this.x, this.y);
@@ -218,7 +215,7 @@ function showMessage(x, y, message) {
 
 canvas.addEventListener('click', (e) => {
     if (!gameActive) return;
-    const rect = canvas.getBoundingClientRect();
+    const rect = canvas.getBoundingRect();
     const clickX = (e.clientX - rect.left) * dpr;
     const clickY = (e.clientY - rect.top) * dpr;
 
