@@ -24,6 +24,13 @@ darkModeToggle.addEventListener('click', () => {
     darkIcon.classList.toggle('hidden');
 });
 
+// Toggle Mobile Navigation
+const navToggle = document.getElementById('navToggle');
+const navMenu = document.getElementById('navMenu');
+navToggle.addEventListener('click', () => {
+    navMenu.classList.toggle('hidden');
+});
+
 // Controle de Música
 const music = document.getElementById('backgroundMusic');
 const musicToggle = document.getElementById('musicToggle');
@@ -78,7 +85,8 @@ const swiper = new Swiper('.swiper', {
         prevEl: '.swiper-button-prev',
     },
     breakpoints: {
-        640: { slidesPerView: 1 },
+        320: { slidesPerView: 1, spaceBetween: 10 },
+        640: { slidesPerView: 1, spaceBetween: 10 },
         768: { slidesPerView: 2, spaceBetween: 20 },
         1024: { slidesPerView: 3, spaceBetween: 30 },
     }
@@ -106,8 +114,12 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // Jogo de Corações Melhorado
 const canvas = document.getElementById('heartGame');
 const ctx = canvas.getContext('2d');
-canvas.width = canvas.offsetWidth;
-canvas.height = canvas.offsetHeight;
+
+// Ajustar canvas para alta DPI
+const dpr = window.devicePixelRatio || 1;
+canvas.width = canvas.offsetWidth * dpr;
+canvas.height = canvas.offsetHeight * dpr;
+ctx.scale(dpr, dpr);
 
 const messages = ['Eu te amo', 'Te amo para sempre', 'Meu amor eterno', 'Você é tudo para mim', 'Amor da minha vida', 'Para sempre juntos', 'Meu coração é seu', 'Te adoro', 'Amor infinito', 'Você me completa'];
 let hearts = [];
@@ -124,13 +136,26 @@ const finalScore = document.getElementById('finalScore');
 
 class Heart {
     constructor() {
-        this.x = Math.random() * (canvas.width - 50) + 25;
-        this.y = Math.random() * (canvas.height - 50) + 25;
+        this.x = Math.random() * (canvas.offsetWidth - 50) + 25;
+        this.y = Math.random() * (canvas.offsetHeight - 50) + 25;
         this.dx = (Math.random() - 0.5) * (3 + level);
         this.dy = (Math.random() - 0.5) * (3 + level);
         this.message = messages[Math.floor(Math.random() * messages.length)];
         this.id = Date.now() + Math.random();
         this.isPowerUp = false;
+    }
+    update() {
+        this.x += this.dx;
+        this.y += this.dy;
+        if (this.x < 25 || this.x > canvas.offsetWidth - 25) this.dx *= -1;
+        if (this.y < 25 || this.y > canvas.offsetHeight - 25) this.dy *= -1;
+    }
+    draw() {
+        ctx.font = '40px Poppins';
+        ctx.fillStyle = body.classList.contains('dark-mode') ? '#d946ef' : '#ec4899';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('❤️', this.x, this.y);
     }
 }
 
@@ -138,6 +163,13 @@ class PowerUp extends Heart {
     constructor() {
         super();
         this.isPowerUp = true;
+    }
+    draw() {
+        ctx.font = '40px Poppins';
+        ctx.fillStyle = '#ffd700';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('⭐', this.x, this.y);
     }
 }
 
@@ -162,9 +194,7 @@ function animate() {
     });
     powerUps.forEach(powerUp => {
         powerUp.update();
-        ctx.font = '40px Poppins';
-        ctx.fillStyle = body.classList.contains('dark-mode') ? '#ffd700' : '#ffd700';
-        ctx.fillText('⭐', powerUp.x, powerUp.y);
+        powerUp.draw();
     });
     requestAnimationFrame(animate);
 }
@@ -184,12 +214,12 @@ function showMessage(x, y, message) {
 canvas.addEventListener('click', (e) => {
     if (!gameActive) return;
     const rect = canvas.getBoundingClientRect();
-    const clickX = e.clientX - rect.left;
-    const clickY = e.clientY - rect.top;
+    const clickX = (e.clientX - rect.left) * dpr;
+    const clickY = (e.clientY - rect.top) * dpr;
 
     hearts = hearts.filter(heart => {
-        if (Math.abs(heart.x - clickX) < 40 && Math.abs(heart.y - clickY) < 40) {
-            showMessage(clickX, clickY, heart.message);
+        if (Math.abs(heart.x - clickX / dpr) < 40 && Math.abs(heart.y - clickY / dpr) < 40) {
+            showMessage(clickX / dpr, clickY / dpr, heart.message);
             score += level;
             updateScore();
             checkLevelUp();
@@ -199,9 +229,9 @@ canvas.addEventListener('click', (e) => {
     });
 
     powerUps = powerUps.filter(powerUp => {
-        if (Math.abs(powerUp.x - clickX) < 40 && Math.abs(powerUp.y - clickY) < 40) {
-            timeLeft += 10; // Extra time
-            showMessage(clickX, clickY, '+10 segundos!');
+        if (Math.abs(powerUp.x - clickX / dpr) < 40 && Math.abs(powerUp.y - clickY / dpr) < 40) {
+            timeLeft += 10;
+            showMessage(clickX / dpr, clickY / dpr, '+10 segundos!');
             return false;
         }
         return true;
@@ -219,7 +249,7 @@ function checkLevelUp() {
     if (score >= level * 5) {
         level++;
         levelDisplay.textContent = `Nível: ${level}`;
-        timeLeft += 20; // Bonus time on level up
+        timeLeft += 20;
     }
 }
 
@@ -257,6 +287,13 @@ document.getElementById('restartGame').addEventListener('click', () => {
     document.getElementById('gameOver').classList.add('hidden');
     startTimer();
     animate();
+});
+
+// Ajustar canvas em redimensionamento
+window.addEventListener('resize', () => {
+    canvas.width = canvas.offsetWidth * dpr;
+    canvas.height = canvas.offsetHeight * dpr;
+    ctx.scale(dpr, dpr);
 });
 
 // Iniciar o Jogo
