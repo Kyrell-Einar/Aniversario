@@ -4,7 +4,7 @@ body {
     background: linear-gradient(to bottom, #ffe4e6, #fff1f2);
     transition: background 0.5s, color 0.5s;
 }
-body.dark-mode {
+body.dark {
     background: linear-gradient(to bottom, #2d1442, #1a0b2e);
     color: #e0e0e0;
 }
@@ -29,7 +29,7 @@ h1, h2, h3 {
     background: linear-gradient(to bottom, #f472b6, #f9a8d4);
     transform: translateX(-50%);
 }
-body.dark-mode .timeline::before {
+body.dark .timeline::before {
     background: linear-gradient(to bottom, #a855f7, #c084fc);
 }
 .timeline-item {
@@ -62,7 +62,7 @@ body.dark-mode .timeline::before {
     border-radius: 50%;
     box-shadow: 0 0 15px rgba(236, 72, 153, 0.5);
 }
-body.dark-mode .timeline-dot {
+body.dark .timeline-dot {
     background: #d946ef;
     box-shadow: 0 0 15px rgba(217, 70, 239, 0.5);
 }
@@ -91,7 +91,7 @@ body.dark-mode .timeline-dot {
     color: #d946ef;
     font-size: 0.9rem;
 }
-body.dark-mode .heart-message {
+body.dark .heart-message {
     background: rgba(30, 27, 75, 0.95);
     color: #f3e8ff;
     box-shadow: 0 4px 20px rgba(167, 139, 250, 0.3);
@@ -104,7 +104,7 @@ body.dark-mode .heart-message {
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(244, 114, 182, 0.3);
 }
-body.dark-mode #gameContainer {
+body.dark #gameContainer {
     background: linear-gradient(to bottom right, #3b0764, #581c87);
     border: 2px solid #a855f7;
     box-shadow: 0 10px 30px rgba(168, 85, 247, 0.3);
@@ -113,28 +113,28 @@ body.dark-mode #gameContainer {
     position: absolute;
     top: 1rem;
     right: 1rem;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.9);
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
     font-weight: bold;
     color: #d81b60;
 }
-body.dark-mode #scoreDisplay {
-    background: rgba(30, 27, 75, 0.8);
+body.dark #scoreDisplay {
+    background: rgba(30, 27, 75, 0.9);
     color: #e1bee7;
 }
 #timerDisplay {
     position: absolute;
     top: 1rem;
     left: 1rem;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.9);
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
     font-weight: bold;
     color: #d81b60;
 }
-body.dark-mode #timerDisplay {
-    background: rgba(30, 27, 75, 0.8);
+body.dark #timerDisplay {
+    background: rgba(30, 27, 75, 0.9);
     color: #e1bee7;
 }
 #levelDisplay {
@@ -142,14 +142,14 @@ body.dark-mode #timerDisplay {
     top: 1rem;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.9);
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
     font-weight: bold;
     color: #d81b60;
 }
-body.dark-mode #levelDisplay {
-    background: rgba(30, 27, 75, 0.8);
+body.dark #levelDisplay {
+    background: rgba(30, 27, 75, 0.9);
     color: #e1bee7;
 }
 #particles-js {

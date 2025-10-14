@@ -19,7 +19,7 @@ const darkModeToggle = document.getElementById('darkModeToggle');
 const lightIcon = document.getElementById('lightIcon');
 const darkIcon = document.getElementById('darkIcon');
 darkModeToggle.addEventListener('click', () => {
-    body.classList.toggle('dark-mode');
+    body.classList.toggle('dark');
     lightIcon.classList.toggle('hidden');
     darkIcon.classList.toggle('hidden');
 });
@@ -68,11 +68,16 @@ const timelineItems = document.querySelectorAll('.timeline-item');
 const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            gsap.from(entry.target, { duration: 1, y: 50, opacity: 0, ease: 'power2.out' });
+            gsap.to(entry.target, { 
+                duration: 1, 
+                y: 0, 
+                opacity: 1, 
+                ease: 'power2.out',
+                onStart: () => entry.target.classList.add('visible')
+            });
         }
     });
-}, { threshold: 0.2 });
+}, { threshold: 0.3 });
 timelineItems.forEach(item => observer.observe(item));
 
 // Inicializar Swiper
@@ -152,7 +157,7 @@ class Heart {
     }
     draw() {
         ctx.font = '40px Poppins';
-        ctx.fillStyle = body.classList.contains('dark-mode') ? '#d946ef' : '#ec4899';
+        ctx.fillStyle = body.classList.contains('dark') ? '#d946ef' : '#ec4899';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillText('❤️', this.x, this.y);
