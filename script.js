@@ -1,7 +1,7 @@
 // Inicializar Partículas
 particlesJS('particles-js', {
     particles: {
-        number: { value: 50, density: { enable: true, value_area: 800 } },
+        number: { value: 30, density: { enable: true, value_area: 800 } },
         color: { value: '#ec4899' },
         shape: { type: 'circle' },
         opacity: { value: 0.5, random: true },
@@ -41,12 +41,18 @@ function toggleMusic() {
     }
 }
 
-musicToggle.addEventListener('click', toggleMusic);
-
-// Ensure YouTube API is ready
-window.onYouTubeIframeAPIReady = function() {
-    // No additional player initialization needed since we're using an iframe
-};
+musicToggle.addEventListener('click', () => {
+    if (!isPlaying) {
+        if (window.AudioContext) {
+            const audioCtx = new AudioContext();
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume().then(toggleMusic).catch(() => alert('Por favor, permita áudio no navegador para reproduzir a música.'));
+                return;
+            }
+        }
+    }
+    toggleMusic();
+});
 
 // Contador de Dias Juntos
 const startDate = new Date('2024-11-09');
@@ -119,9 +125,15 @@ const ctx = canvas.getContext('2d');
 
 // Ajustar canvas para alta DPI
 const dpr = window.devicePixelRatio || 1;
-canvas.width = canvas.offsetWidth * dpr;
-canvas.height = canvas.offsetHeight * dpr;
-ctx.scale(dpr, dpr);
+
+function resizeCanvas() {
+    canvas.width = canvas.offsetWidth * dpr;
+    canvas.height = canvas.offsetHeight * dpr;
+    ctx.setTransform(1, 0, 0, 1, 0, 0); // Reset transform
+    ctx.scale(dpr, dpr);
+}
+
+resizeCanvas();
 
 const messages = ['Eu te amo', 'Te amo para sempre', 'Meu amor eterno', 'Você é tudo para mim', 'Amor da minha vida', 'Para sempre juntos', 'Meu coração é seu', 'Te adoro', 'Amor infinito', 'Você me completa'];
 let hearts = [];
@@ -176,7 +188,7 @@ class PowerUp extends Heart {
 }
 
 function addHeart() {
-    if (gameActive && hearts.length < 6 + level) {
+    if (gameActive && hearts.length < 4 + level) {
         hearts.push(new Heart());
     }
 }
@@ -187,9 +199,22 @@ function addPowerUp() {
     }
 }
 
+function showClickEffect(x, y) {
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(x, y, 20, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(236, 72, 153, 0.3)';
+    ctx.fill();
+    ctx.restore();
+    setTimeout(() => {
+        ctx.clearRect(x - 25, y - 25, 50, 50);
+    }, 200);
+}
+
 function animate() {
     if (!gameActive) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.save();
     hearts.forEach(heart => {
         heart.update();
         heart.draw();
@@ -198,6 +223,7 @@ function animate() {
         powerUp.update();
         powerUp.draw();
     });
+    ctx.restore();
     requestAnimationFrame(animate);
 }
 
@@ -215,12 +241,14 @@ function showMessage(x, y, message) {
 
 canvas.addEventListener('click', (e) => {
     if (!gameActive) return;
-    const rect = canvas.getBoundingRect();
+    const rect = canvas.getBoundingClientRect();
     const clickX = (e.clientX - rect.left) * dpr;
     const clickY = (e.clientY - rect.top) * dpr;
 
+    showClickEffect(clickX / dpr, clickY / dpr);
+
     hearts = hearts.filter(heart => {
-        if (Math.abs(heart.x - clickX / dpr) < 40 && Math.abs(heart.y - clickY / dpr) < 40) {
+        if (Math.abs(heart.x - clickX / dpr) < 50 && Math.abs(heart.y - clickY / dpr) < 50) {
             showMessage(clickX / dpr, clickY / dpr, heart.message);
             score += level;
             updateScore();
@@ -231,7 +259,7 @@ canvas.addEventListener('click', (e) => {
     });
 
     powerUps = powerUps.filter(powerUp => {
-        if (Math.abs(powerUp.x - clickX / dpr) < 40 && Math.abs(powerUp.y - clickY / dpr) < 40) {
+        if (Math.abs(powerUp.x - clickX / dpr) < 50 && Math.abs(powerUp.y - clickY / dpr) < 50) {
             timeLeft += 10;
             showMessage(clickX / dpr, clickY / dpr, '+10 segundos!');
             return false;
@@ -292,11 +320,7 @@ document.getElementById('restartGame').addEventListener('click', () => {
 });
 
 // Ajustar canvas em redimensionamento
-window.addEventListener('resize', () => {
-    canvas.width = canvas.offsetWidth * dpr;
-    canvas.height = canvas.offsetHeight * dpr;
-    ctx.scale(dpr, dpr);
-});
+window.addEventListener('resize', resizeCanvas);
 
 // Iniciar o Jogo
 setInterval(addHeart, 800);

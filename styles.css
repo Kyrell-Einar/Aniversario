@@ -30,7 +30,6 @@ h1, h2, h3 {
     padding: 1.5rem;
     opacity: 0;
     transform: translateY(50px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
 }
 .timeline-item.visible {
     opacity: 1;
@@ -135,7 +134,7 @@ h1, h2, h3 {
         width: 100%;
         left: 0 !important;
         text-align: left !important;
-        padding-left: 3rem;
+        padding-left: 2.5rem;
         padding-right: 1rem;
     }
     .timeline-dot {
