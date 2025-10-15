@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Uma celebração interativa e romântica de um ano de namoro, com memórias, fotos, jogo, planos e mais.">
-    <meta name="keywords" content="aniversário de namoro, amor, celebração, memórias, jogo, quotes">
+    <meta name="description" content="Uma celebração interativa e romântica de um ano de namoro, com memórias, fotos, planos e mais.">
+    <meta name="keywords" content="aniversário de namoro, amor, celebração, memórias, quotes">
     <meta property="og:title" content="Um Ano de Nós Dois - Uma Jornada de Amor Eterno">
     <meta property="og:description" content="Uma jornada de amor, memórias e sonhos eternos. Celebre conosco!">
     <meta property="og:image" content="https://via.placeholder.com/1920x1080?text=Nosso+Amor">
@@ -30,7 +30,7 @@
       "image": [
         "https://via.placeholder.com/800x500?text=Momento+1"
       ],
-      "description": "Celebração de um ano de amor com memórias, jogo e planos futuros.",
+      "description": "Celebração de um ano de amor com memórias e planos futuros.",
       "offers": {
         "@type": "Offer",
         "url": "https://kyrell-einar.github.io/Aniversario/",
@@ -86,7 +86,6 @@
                 <li><a href="#jornada" class="hover:text-pink-200 transition">Jornada</a></li>
                 <li><a href="#galeria" class="hover:text-pink-200 transition">Galeria</a></li>
                 <li><a href="#quotes" class="hover:text-pink-200 transition">Quotes</a></li>
-                <li><a href="#jogo" class="hover:text-pink-200 transition">Jogo</a></li>
                 <li><a href="#futuro" class="hover:text-pink-200 transition">Futuro</a></li>
             </ul>
         </div>
@@ -234,26 +233,6 @@
         </div>
     </section>
 
-    <!-- Jogo de Corações Melhorado -->
-    <section id="jogo" class="py-20 bg-gradient-to-b from-pink-50 to-white">
-        <h2 class="text-4xl sm:text-5xl font-bold text-pink-900 text-center mb-12 cursive">Caça aos Corações</h2>
-        <div id="gameContainer" class="max-w-5xl mx-auto relative px-4">
-            <canvas id="heartGame" role="region" aria-label="Jogo Caça aos Corações" class="w-full h-64 sm:h-96 rounded-lg"></canvas>
-            <div id="timerDisplay" class="text-base sm:text-lg">Tempo Restante: 60s</div>
-            <div id="scoreDisplay" class="text-base sm:text-lg">Corações Coletados: 0 / 15</div>
-            <div id="levelDisplay" class="text-base sm:text-lg">Nível: 1</div>
-            <div id="gameOver" class="hidden absolute inset-0 flex items-center justify-center bg-black bg-opacity-75 text-white rounded-lg">
-                <div class="text-center">
-                    <h3 class="text-2xl sm:text-3xl font-bold text-pink-400 mb-4">Fim do Jogo!</h3>
-                    <p class="text-base sm:text-lg">Pontuação: <span id="finalScore">0</span> / 15</p>
-                    <p class="text-base sm:text-lg">Nosso amor vence qualquer desafio! ❤️</p>
-                    <button id="restartGame" class="mt-6 bg-pink-500 hover:bg-pink-600 text-white px-6 sm:px-8 py-3 rounded-full text-base sm:text-lg transition">Jogar Novamente</button>
-                </div>
-            </div>
-        </div>
-        <p class="text-center mt-4 text-gray-700 text-sm sm:text-base">Clique nos corações flutuantes para revelar mensagens de amor antes que o tempo acabe! Colete power-ups para tempo extra.</p>
-    </section>
-
     <!-- Planos para o Futuro Expandida -->
     <section id="futuro" class="py-20 bg-gradient-to-b from-white to-pink-50">
         <h2 class="text-4xl sm:text-5xl font-bold text-pink-900 text-center mb-12 cursive">Nosso Futuro Juntos</h2>
@@ -305,6 +284,7 @@
             <div class="mt-4">
                 <a href="mailto:seuemail@example.com" class="text-pink-200 hover:text-white">Envie uma mensagem de amor</a>
             </div>
+            <div id="daysTogetherFooter" class="mt-4 text-sm">Dias Juntos: Calculando...</div>
         </div>
     </footer>
 
