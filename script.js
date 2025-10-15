@@ -54,11 +54,20 @@ musicToggle.addEventListener('click', () => {
     toggleMusic();
 });
 
-// Contador de Dias Juntos
+// Contador de Dias Juntos com Horas e Minutos
 const startDate = new Date('2024-11-09');
-const today = new Date();
-const daysTogether = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
-document.getElementById('daysTogether').textContent = `Dias Juntos: ${daysTogether}`;
+
+function updateDaysTogether() {
+    const today = new Date();
+    const timeDiff = today - startDate;
+    const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+    document.getElementById('daysTogether').textContent = `Dias Juntos: ${days} dias, ${hours} horas e ${minutes} minutos`;
+}
+
+updateDaysTogether();
+setInterval(updateDaysTogether, 60000); // Atualiza a cada minuto
 
 // Inicializar GSAP
 gsap.registerPlugin();
