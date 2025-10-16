@@ -1,7 +1,7 @@
 body {
     font-family: 'Poppins', sans-serif;
     overflow-x: hidden;
-    background: linear-gradient(to bottom, #fff1f2, #fbcfe8);
+    background: linear-gradient(to bottom, #fff1f2, #f9a8d4, #d8b4fe);
 }
 h1, h2, h3 {
     font-family: 'Playfair Display', serif;
@@ -21,7 +21,7 @@ h1, h2, h3 {
     bottom: 0;
     left: 50%;
     width: 4px;
-    background: linear-gradient(to bottom, #f472b6, #f9a8d4);
+    background: linear-gradient(to bottom, #f472b6, #d8b4fe);
     transform: translateX(-50%);
 }
 .timeline-item {
@@ -51,7 +51,7 @@ h1, h2, h3 {
     background: #ec4899;
     border: 3px solid #fff;
     border-radius: 50%;
-    box-shadow: 0 0 15px rgba(236, 72, 153, 0.5);
+    box-shadow: 0 0 20px rgba(236, 72, 153, 0.6);
 }
 .timeline-item:nth-child(odd) .timeline-dot {
     right: -0.75rem;
@@ -64,7 +64,7 @@ h1, h2, h3 {
 }
 .swiper-slide img:hover {
     transform: scale(1.1);
-    box-shadow: 0 12px 24px rgba(236, 72, 153, 0.5);
+    box-shadow: 0 15px 30px rgba(236, 72, 153, 0.6);
 }
 #particles-js {
     position: fixed;
@@ -73,14 +73,14 @@ h1, h2, h3 {
     width: 100%;
     height: 100%;
     z-index: -1;
-    opacity: 0.8;
+    opacity: 0;
 }
 .bg-white {
     transition: transform 0.3s ease, box-shadow 0.3s ease, rotation 0.3s ease;
 }
 .bg-white:hover {
     transform: scale(1.05);
-    box-shadow: 0 12px 24px rgba(236, 72, 153, 0.5);
+    box-shadow: 0 15px 30px rgba(236, 72, 153, 0.6);
 }
 .heart-border {
     position: relative;
@@ -88,24 +88,38 @@ h1, h2, h3 {
 .heart-border::before {
     content: '';
     position: absolute;
-    top: -10px;
+    top: -12px;
     left: 50%;
-    width: 20px;
-    height: 20px;
-    background: url('https://via.placeholder.com/20x20?text=♥') no-repeat center;
+    width: 24px;
+    height: 24px;
+    background: url('https://via.placeholder.com/24x24?text=♥') no-repeat center;
     background-size: contain;
     transform: translateX(-50%);
 }
 .heart-border::after {
     content: '';
     position: absolute;
-    bottom: -10px;
+    bottom: -12px;
     left: 50%;
-    width: 20px;
-    height: 20px;
-    background: url('https://via.placeholder.com/20x20?text=♥') no-repeat center;
+    width: 24px;
+    height: 24px;
+    background: url('https://via.placeholder.com/24x24?text=♥') no-repeat center;
     background-size: contain;
     transform: translateX(-50%);
+}
+#scrollProgress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: #f9a8d4;
+    z-index: 20;
+}
+#progressBar {
+    height: 100%;
+    background: linear-gradient(to right, #ec4899, #d8b4fe);
+    transition: width 0.3s ease;
 }
 @media (max-width: 768px) {
     .timeline::before {
@@ -138,7 +152,7 @@ h1, h2, h3 {
         padding: 0.5rem 1.5rem;
         font-size: 0.9rem;
     }
-    #surpriseMessage iframe {
+    #surpriseMessage iframe, #secretMessage iframe {
         height: 200px;
     }
     .timeline-item img {
@@ -146,8 +160,11 @@ h1, h2, h3 {
         height: 3rem;
     }
     .heart-border::before, .heart-border::after {
-        width: 15px;
-        height: 15px;
+        width: 18px;
+        height: 18px;
+    }
+    #scrollProgress {
+        height: 3px;
     }
 }
 @media (max-width: 640px) {

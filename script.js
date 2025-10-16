@@ -1,17 +1,20 @@
 // Inicializar Partículas
 particlesJS('particles-js', {
     particles: {
-        number: { value: 80, density: { enable: true, value_area: 800 } },
-        color: { value: ['#ec4899', '#f9a8d4', '#fff1f2', '#fed7e2'] },
-        shape: { type: ['circle', 'heart'], stroke: { width: 0 } },
-        opacity: { value: 0.7, random: true },
-        size: { value: 5, random: true },
-        line_linked: { enable: true, distance: 150, color: '#f9a8d4', opacity: 0.4, width: 1 },
-        move: { enable: true, speed: 4, direction: 'none', random: true, straight: false, out_mode: 'out', bounce: false }
+        number: { value: 100, density: { enable: true, value_area: 800 } },
+        color: { value: ['#ec4899', '#f9a8d4', '#d8b4fe', '#fed7e2', '#fef3c7'] },
+        shape: { type: ['circle', 'heart', 'star'], stroke: { width: 0 } },
+        opacity: { value: 0.8, random: true },
+        size: { value: 6, random: true },
+        line_linked: { enable: true, distance: 120, color: '#f9a8d4', opacity: 0.5, width: 1.5 },
+        move: { enable: true, speed: 5, direction: 'none', random: true, straight: false, out_mode: 'out', bounce: false }
     },
     interactivity: { detect_on: 'canvas', events: { onhover: { enable: true, mode: 'bubble' }, onclick: { enable: true, mode: 'repulse' } } },
     retina_detect: true
 });
+
+// Animação de Fade-In com Partículas
+gsap.to('#particles-js', { duration: 2, opacity: 1, ease: 'power2.out', delay: 0.5 });
 
 // Toggle Mobile Navigation
 const navToggle = document.getElementById('navToggle');
@@ -84,11 +87,12 @@ const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             gsap.to(entry.target, { 
-                duration: 1, 
+                duration: 1.2, 
                 y: 0, 
                 opacity: 1, 
                 scale: 1, 
-                ease: 'power2.out',
+                rotation: 3,
+                ease: 'power3.out',
                 onStart: () => entry.target.classList.add('visible')
             });
         }
@@ -105,7 +109,7 @@ sections.forEach(section => {
             start: 'top 80%',
             toggleActions: 'play none none none'
         },
-        duration: 1.2,
+        duration: 1.5,
         y: 50,
         opacity: 0,
         rotation: 5,
@@ -117,7 +121,7 @@ sections.forEach(section => {
 // Inicializar Swiper
 const swiper = new Swiper('.swiper', {
     loop: true,
-    autoplay: { delay: 2500, disableOnInteraction: false },
+    autoplay: { delay: 2000, disableOnInteraction: false },
     pagination: { el: '.swiper-pagination', clickable: true },
     navigation: {
         nextEl: '.swiper-button-next',
@@ -125,9 +129,9 @@ const swiper = new Swiper('.swiper', {
     },
     breakpoints: {
         320: { slidesPerView: 1, spaceBetween: 10 },
-        640: { slidesPerView: 2, spaceBetween: 15 },
-        768: { slidesPerView: 3, spaceBetween: 20 },
-        1024: { slidesPerView: 4, spaceBetween: 25 },
+        640: { slidesPerView: 2, spaceBetween: 12 },
+        768: { slidesPerView: 3, spaceBetween: 15 },
+        1024: { slidesPerView: 5, spaceBetween: 20 },
     }
 });
 
@@ -136,8 +140,22 @@ document.getElementById('loveButton').addEventListener('click', () => {
     const message = document.getElementById('surpriseMessage');
     message.classList.toggle('hidden');
     if (!message.classList.contains('hidden')) {
-        gsap.from('#surpriseMessage', { duration: 1.2, scale: 0.7, opacity: 0, rotation: 10, ease: 'elastic.out(1, 0.3)' });
+        gsap.from('#surpriseMessage', { duration: 1.5, scale: 0.7, opacity: 0, rotation: 10, ease: 'elastic.out(1, 0.3)' });
     }
+});
+
+// Botão de Mensagem Secreta
+const secretMessageButton = document.getElementById('secretMessageButton');
+const secretMessage = document.getElementById('secretMessage');
+const closeSecretMessage = document.getElementById('closeSecretMessage');
+secretMessageButton.addEventListener('click', () => {
+    secretMessage.classList.toggle('hidden');
+    if (!secretMessage.classList.contains('hidden')) {
+        gsap.from('#secretMessage', { duration: 1.2, scale: 0.7, opacity: 0, rotation: 10, ease: 'elastic.out(1, 0.3)' });
+    }
+});
+closeSecretMessage.addEventListener('click', () => {
+    secretMessage.classList.add('hidden');
 });
 
 // Smooth Scroll
@@ -154,7 +172,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 const cards = document.querySelectorAll('.bg-white');
 cards.forEach(card => {
     card.addEventListener('mouseenter', () => {
-        gsap.to(card, { duration: 0.3, scale: 1.05, boxShadow: '0 12px 24px rgba(236, 72, 153, 0.5)', rotation: 2 });
+        gsap.to(card, { duration: 0.3, scale: 1.05, boxShadow: '0 15px 30px rgba(236, 72, 153, 0.6)', rotation: 3 });
     });
     card.addEventListener('mouseleave', () => {
         gsap.to(card, { duration: 0.3, scale: 1, boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', rotation: 0 });
@@ -166,10 +184,20 @@ const backToTop = document.getElementById('backToTop');
 window.addEventListener('scroll', () => {
     if (window.scrollY > 300) {
         backToTop.classList.remove('hidden');
+        secretMessageButton.classList.remove('hidden');
     } else {
         backToTop.classList.add('hidden');
+        secretMessageButton.classList.add('hidden');
     }
 });
 backToTop.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// Barra de Progresso de Rolagem
+window.addEventListener('scroll', () => {
+    const winScroll = document.documentElement.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (winScroll / height) * 100;
+    document.getElementById('progressBar').style.width = scrolled + '%';
 });
