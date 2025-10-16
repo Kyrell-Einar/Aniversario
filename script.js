@@ -1,13 +1,13 @@
 // Inicializar Partículas
 particlesJS('particles-js', {
     particles: {
-        number: { value: 50, density: { enable: true, value_area: 800 } },
-        color: { value: ['#ec4899', '#f9a8d4', '#fff1f2'] },
+        number: { value: 80, density: { enable: true, value_area: 800 } },
+        color: { value: ['#ec4899', '#f9a8d4', '#fff1f2', '#fed7e2'] },
         shape: { type: ['circle', 'heart'], stroke: { width: 0 } },
-        opacity: { value: 0.6, random: true },
-        size: { value: 4, random: true },
-        line_linked: { enable: false },
-        move: { enable: true, speed: 3, direction: 'none', random: true, straight: false, out_mode: 'out', bounce: false }
+        opacity: { value: 0.7, random: true },
+        size: { value: 5, random: true },
+        line_linked: { enable: true, distance: 150, color: '#f9a8d4', opacity: 0.4, width: 1 },
+        move: { enable: true, speed: 4, direction: 'none', random: true, straight: false, out_mode: 'out', bounce: false }
     },
     interactivity: { detect_on: 'canvas', events: { onhover: { enable: true, mode: 'bubble' }, onclick: { enable: true, mode: 'repulse' } } },
     retina_detect: true
@@ -71,8 +71,8 @@ function updateDaysTogether() {
 updateDaysTogether();
 setInterval(updateDaysTogether, 60000); // Atualiza a cada minuto
 
-// Inicializar GSAP
-gsap.registerPlugin();
+// Inicializar GSAP e ScrollTrigger
+gsap.registerPlugin(ScrollTrigger);
 gsap.from('#hero h1', { duration: 1.5, y: 50, opacity: 0, ease: 'power2.out', delay: 0.5 });
 gsap.from('#hero p', { duration: 1.5, y: 50, opacity: 0, ease: 'power2.out', delay: 0.8 });
 gsap.from('#hero a', { duration: 1.5, y: 50, opacity: 0, ease: 'power2.out', delay: 1 });
@@ -105,18 +105,19 @@ sections.forEach(section => {
             start: 'top 80%',
             toggleActions: 'play none none none'
         },
-        duration: 1,
+        duration: 1.2,
         y: 50,
         opacity: 0,
-        stagger: 0.2,
-        ease: 'power2.out'
+        rotation: 5,
+        stagger: 0.3,
+        ease: 'power3.out'
     });
 });
 
 // Inicializar Swiper
 const swiper = new Swiper('.swiper', {
     loop: true,
-    autoplay: { delay: 3000, disableOnInteraction: false },
+    autoplay: { delay: 2500, disableOnInteraction: false },
     pagination: { el: '.swiper-pagination', clickable: true },
     navigation: {
         nextEl: '.swiper-button-next',
@@ -126,7 +127,7 @@ const swiper = new Swiper('.swiper', {
         320: { slidesPerView: 1, spaceBetween: 10 },
         640: { slidesPerView: 2, spaceBetween: 15 },
         768: { slidesPerView: 3, spaceBetween: 20 },
-        1024: { slidesPerView: 4, spaceBetween: 30 },
+        1024: { slidesPerView: 4, spaceBetween: 25 },
     }
 });
 
@@ -135,7 +136,7 @@ document.getElementById('loveButton').addEventListener('click', () => {
     const message = document.getElementById('surpriseMessage');
     message.classList.toggle('hidden');
     if (!message.classList.contains('hidden')) {
-        gsap.from('#surpriseMessage', { duration: 1.2, scale: 0.7, opacity: 0, ease: 'elastic.out(1, 0.3)' });
+        gsap.from('#surpriseMessage', { duration: 1.2, scale: 0.7, opacity: 0, rotation: 10, ease: 'elastic.out(1, 0.3)' });
     }
 });
 
@@ -153,9 +154,22 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 const cards = document.querySelectorAll('.bg-white');
 cards.forEach(card => {
     card.addEventListener('mouseenter', () => {
-        gsap.to(card, { duration: 0.3, scale: 1.05, boxShadow: '0 10px 20px rgba(236, 72, 153, 0.4)' });
+        gsap.to(card, { duration: 0.3, scale: 1.05, boxShadow: '0 12px 24px rgba(236, 72, 153, 0.5)', rotation: 2 });
     });
     card.addEventListener('mouseleave', () => {
-        gsap.to(card, { duration: 0.3, scale: 1, boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)' });
+        gsap.to(card, { duration: 0.3, scale: 1, boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', rotation: 0 });
     });
+});
+
+// Botão Voltar ao Topo
+const backToTop = document.getElementById('backToTop');
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+        backToTop.classList.remove('hidden');
+    } else {
+        backToTop.classList.add('hidden');
+    }
+});
+backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 });

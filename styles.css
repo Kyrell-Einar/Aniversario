@@ -1,7 +1,7 @@
 body {
     font-family: 'Poppins', sans-serif;
     overflow-x: hidden;
-    background: linear-gradient(to bottom, #fff1f2, #fed7e2);
+    background: linear-gradient(to bottom, #fff1f2, #fbcfe8);
 }
 h1, h2, h3 {
     font-family: 'Playfair Display', serif;
@@ -64,7 +64,7 @@ h1, h2, h3 {
 }
 .swiper-slide img:hover {
     transform: scale(1.1);
-    box-shadow: 0 10px 20px rgba(236, 72, 153, 0.4);
+    box-shadow: 0 12px 24px rgba(236, 72, 153, 0.5);
 }
 #particles-js {
     position: fixed;
@@ -73,14 +73,39 @@ h1, h2, h3 {
     width: 100%;
     height: 100%;
     z-index: -1;
-    opacity: 0.7;
+    opacity: 0.8;
 }
 .bg-white {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, rotation 0.3s ease;
 }
 .bg-white:hover {
     transform: scale(1.05);
-    box-shadow: 0 10px 20px rgba(236, 72, 153, 0.4);
+    box-shadow: 0 12px 24px rgba(236, 72, 153, 0.5);
+}
+.heart-border {
+    position: relative;
+}
+.heart-border::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    background: url('https://via.placeholder.com/20x20?text=♥') no-repeat center;
+    background-size: contain;
+    transform: translateX(-50%);
+}
+.heart-border::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    background: url('https://via.placeholder.com/20x20?text=♥') no-repeat center;
+    background-size: contain;
+    transform: translateX(-50%);
 }
 @media (max-width: 768px) {
     .timeline::before {
@@ -120,6 +145,10 @@ h1, h2, h3 {
         width: 3rem;
         height: 3rem;
     }
+    .heart-border::before, .heart-border::after {
+        width: 15px;
+        height: 15px;
+    }
 }
 @media (max-width: 640px) {
     nav ul {
@@ -130,6 +159,6 @@ h1, h2, h3 {
         margin: 0.5rem 0;
     }
     .swiper {
-        padding: 0 1rem;
+        padding: 0 0.5rem;
     }
 }
