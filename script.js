@@ -1,13 +1,13 @@
 // Inicializar Partículas
 particlesJS('particles-js', {
     particles: {
-        number: { value: 30, density: { enable: true, value_area: 800 } },
-        color: { value: '#ec4899' },
-        shape: { type: 'circle' },
-        opacity: { value: 0.5, random: true },
-        size: { value: 3, random: true },
+        number: { value: 50, density: { enable: true, value_area: 800 } },
+        color: { value: ['#ec4899', '#f9a8d4', '#fff1f2'] },
+        shape: { type: ['circle', 'heart'], stroke: { width: 0 } },
+        opacity: { value: 0.6, random: true },
+        size: { value: 4, random: true },
         line_linked: { enable: false },
-        move: { enable: true, speed: 2, direction: 'none', random: true, straight: false, out_mode: 'out', bounce: false }
+        move: { enable: true, speed: 3, direction: 'none', random: true, straight: false, out_mode: 'out', bounce: false }
     },
     interactivity: { detect_on: 'canvas', events: { onhover: { enable: true, mode: 'bubble' }, onclick: { enable: true, mode: 'repulse' } } },
     retina_detect: true
@@ -18,6 +18,7 @@ const navToggle = document.getElementById('navToggle');
 const navMenu = document.getElementById('navMenu');
 navToggle.addEventListener('click', () => {
     navMenu.classList.toggle('hidden');
+    gsap.to(navMenu, { duration: 0.5, height: navMenu.classList.contains('hidden') ? 0 : 'auto', ease: 'power2.out' });
 });
 
 // Controle de Música
@@ -75,6 +76,7 @@ gsap.registerPlugin();
 gsap.from('#hero h1', { duration: 1.5, y: 50, opacity: 0, ease: 'power2.out', delay: 0.5 });
 gsap.from('#hero p', { duration: 1.5, y: 50, opacity: 0, ease: 'power2.out', delay: 0.8 });
 gsap.from('#hero a', { duration: 1.5, y: 50, opacity: 0, ease: 'power2.out', delay: 1 });
+gsap.from('#hero #daysTogether', { duration: 1.5, y: 50, opacity: 0, ease: 'power2.out', delay: 1.2 });
 
 // Animação da Timeline
 const timelineItems = document.querySelectorAll('.timeline-item');
@@ -85,6 +87,7 @@ const observer = new IntersectionObserver(entries => {
                 duration: 1, 
                 y: 0, 
                 opacity: 1, 
+                scale: 1, 
                 ease: 'power2.out',
                 onStart: () => entry.target.classList.add('visible')
             });
@@ -93,10 +96,27 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.3 });
 timelineItems.forEach(item => observer.observe(item));
 
+// Animação das Seções
+const sections = document.querySelectorAll('section');
+sections.forEach(section => {
+    gsap.from(section.children, {
+        scrollTrigger: {
+            trigger: section,
+            start: 'top 80%',
+            toggleActions: 'play none none none'
+        },
+        duration: 1,
+        y: 50,
+        opacity: 0,
+        stagger: 0.2,
+        ease: 'power2.out'
+    });
+});
+
 // Inicializar Swiper
 const swiper = new Swiper('.swiper', {
     loop: true,
-    autoplay: { delay: 4000, disableOnInteraction: false },
+    autoplay: { delay: 3000, disableOnInteraction: false },
     pagination: { el: '.swiper-pagination', clickable: true },
     navigation: {
         nextEl: '.swiper-button-next',
@@ -104,9 +124,9 @@ const swiper = new Swiper('.swiper', {
     },
     breakpoints: {
         320: { slidesPerView: 1, spaceBetween: 10 },
-        640: { slidesPerView: 1, spaceBetween: 10 },
-        768: { slidesPerView: 2, spaceBetween: 20 },
-        1024: { slidesPerView: 3, spaceBetween: 30 },
+        640: { slidesPerView: 2, spaceBetween: 15 },
+        768: { slidesPerView: 3, spaceBetween: 20 },
+        1024: { slidesPerView: 4, spaceBetween: 30 },
     }
 });
 
@@ -126,5 +146,16 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         document.querySelector(this.getAttribute('href')).scrollIntoView({
             behavior: 'smooth'
         });
+    });
+});
+
+// Efeito de Hover nos Cards
+const cards = document.querySelectorAll('.bg-white');
+cards.forEach(card => {
+    card.addEventListener('mouseenter', () => {
+        gsap.to(card, { duration: 0.3, scale: 1.05, boxShadow: '0 10px 20px rgba(236, 72, 153, 0.4)' });
+    });
+    card.addEventListener('mouseleave', () => {
+        gsap.to(card, { duration: 0.3, scale: 1, boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)' });
     });
 });

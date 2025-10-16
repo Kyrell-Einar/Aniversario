@@ -1,7 +1,7 @@
 body {
     font-family: 'Poppins', sans-serif;
     overflow-x: hidden;
-    background: linear-gradient(to bottom, #ffe4e6, #fff1f2);
+    background: linear-gradient(to bottom, #fff1f2, #fed7e2);
 }
 h1, h2, h3 {
     font-family: 'Playfair Display', serif;
@@ -29,11 +29,11 @@ h1, h2, h3 {
     width: 45%;
     padding: 1.5rem;
     opacity: 0;
-    transform: translateY(50px);
+    transform: translateY(50px) scale(0.95);
 }
 .timeline-item.visible {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
 }
 .timeline-item:nth-child(odd) {
     left: 0;
@@ -60,10 +60,11 @@ h1, h2, h3 {
     left: -0.75rem;
 }
 .swiper-slide img {
-    transition: transform 0.5s ease;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
 }
 .swiper-slide img:hover {
     transform: scale(1.1);
+    box-shadow: 0 10px 20px rgba(236, 72, 153, 0.4);
 }
 #particles-js {
     position: fixed;
@@ -72,7 +73,14 @@ h1, h2, h3 {
     width: 100%;
     height: 100%;
     z-index: -1;
-    opacity: 0.5;
+    opacity: 0.7;
+}
+.bg-white {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.bg-white:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(236, 72, 153, 0.4);
 }
 @media (max-width: 768px) {
     .timeline::before {
@@ -108,6 +116,10 @@ h1, h2, h3 {
     #surpriseMessage iframe {
         height: 200px;
     }
+    .timeline-item img {
+        width: 3rem;
+        height: 3rem;
+    }
 }
 @media (max-width: 640px) {
     nav ul {
@@ -116,5 +128,8 @@ h1, h2, h3 {
     }
     nav li {
         margin: 0.5rem 0;
+    }
+    .swiper {
+        padding: 0 1rem;
     }
 }
