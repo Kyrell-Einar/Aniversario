@@ -16,6 +16,9 @@ particlesJS('particles-js', {
 // Animação de Fade-In com Partículas
 gsap.to('#particles-js', { duration: 2, opacity: 1, ease: 'power2.out', delay: 0.5 });
 
+// Animação de Entrada para o Botão de Mensagem Secreta
+gsap.from('#secretMessageButton', { duration: 1.5, x: 100, opacity: 0, ease: 'power2.out', delay: 1 });
+
 // Toggle Mobile Navigation
 const navToggle = document.getElementById('navToggle');
 const navMenu = document.getElementById('navMenu');
@@ -59,7 +62,7 @@ musicToggle.addEventListener('click', () => {
 });
 
 // Contador de Dias Juntos com Horas e Minutos
-const startDate = new Date('2024-11-09');
+const startDate = new Date('2024-11-09T00:00:00-03:00');
 
 function updateDaysTogether() {
     const today = new Date();
@@ -117,6 +120,9 @@ sections.forEach(section => {
         ease: 'power3.out'
     });
 });
+
+// Animação da Seção de Surpresa
+gsap.from('#surpriseMessage', { duration: 1.5, scale: 0.7, opacity: 0, ease: 'elastic.out(1, 0.3)', delay: 1.5 });
 
 // Inicializar Swiper
 const swiper = new Swiper('.swiper', {
@@ -184,10 +190,8 @@ const backToTop = document.getElementById('backToTop');
 window.addEventListener('scroll', () => {
     if (window.scrollY > 300) {
         backToTop.classList.remove('hidden');
-        secretMessageButton.classList.remove('hidden');
     } else {
         backToTop.classList.add('hidden');
-        secretMessageButton.classList.add('hidden');
     }
 });
 backToTop.addEventListener('click', () => {

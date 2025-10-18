@@ -121,6 +121,15 @@ h1, h2, h3 {
     background: linear-gradient(to right, #ec4899, #d8b4fe);
     transition: width 0.3s ease;
 }
+#secretMessageButton {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+#secretMessageButton:hover {
+    transform: scale(1.1);
+}
+#surpriseMessage {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
 @media (max-width: 768px) {
     .timeline::before {
         left: 1.5rem;
@@ -165,6 +174,13 @@ h1, h2, h3 {
     }
     #scrollProgress {
         height: 3px;
+    }
+    #secretMessageButton {
+        bottom: 12rem;
+        right: 1rem;
+    }
+    #surpriseMessage {
+        max-width: 90%;
     }
 }
 @media (max-width: 640px) {
