@@ -1,0 +1,262 @@
+/*
+ * DESIGN: Romantismo Celestial
+ * - Base: azul-meia-noite profundo (#0a0e27) | Destaques: dourado champanhe (#e8c87a) | Romântico: rosa-nebulosa (#d9a5b3)
+ * - Tipografia: Cormorant Garamond (display/itálico), Great Vibes (script), Montserrat (corpo leve)
+ * - Movimento: lento, etéreo, parallax multi-camada, brilhos cintilantes
+ */
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-rose-nebula: var(--rose-nebula);
+  --color-midnight: var(--midnight);
+  --color-midnight-deep: var(--midnight-deep);
+  --font-display: "Cormorant Garamond", serif;
+  --font-script: "Great Vibes", cursive;
+  --font-sans: "Montserrat", sans-serif;
+}
+
+:root,
+.dark {
+  --radius: 0.65rem;
+  /* Celestial palette */
+  --midnight: oklch(0.18 0.045 275);
+  --midnight-deep: oklch(0.13 0.04 275);
+  --gold: oklch(0.84 0.1 85);
+  --gold-soft: oklch(0.9 0.06 90);
+  --rose-nebula: oklch(0.78 0.06 10);
+
+  --background: oklch(0.15 0.042 275);
+  --foreground: oklch(0.93 0.015 90);
+  --card: oklch(0.2 0.045 275);
+  --card-foreground: oklch(0.93 0.015 90);
+  --popover: oklch(0.2 0.045 275);
+  --popover-foreground: oklch(0.93 0.015 90);
+  --primary: oklch(0.84 0.1 85);
+  --primary-foreground: oklch(0.15 0.042 275);
+  --secondary: oklch(0.25 0.05 275);
+  --secondary-foreground: oklch(0.9 0.03 90);
+  --muted: oklch(0.24 0.04 275);
+  --muted-foreground: oklch(0.72 0.02 280);
+  --accent: oklch(0.78 0.06 10);
+  --accent-foreground: oklch(0.15 0.042 275);
+  --destructive: oklch(0.6 0.2 25);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.84 0.1 85 / 18%);
+  --input: oklch(0.84 0.1 85 / 22%);
+  --ring: oklch(0.84 0.1 85 / 60%);
+  --chart-1: oklch(0.84 0.1 85);
+  --chart-2: oklch(0.78 0.06 10);
+  --chart-3: oklch(0.6 0.1 280);
+  --chart-4: oklch(0.5 0.08 275);
+  --chart-5: oklch(0.4 0.06 275);
+  --sidebar: oklch(0.18 0.045 275);
+  --sidebar-foreground: oklch(0.93 0.015 90);
+  --sidebar-primary: oklch(0.84 0.1 85);
+  --sidebar-primary-foreground: oklch(0.15 0.042 275);
+  --sidebar-accent: oklch(0.25 0.05 275);
+  --sidebar-accent-foreground: oklch(0.93 0.015 90);
+  --sidebar-border: oklch(0.84 0.1 85 / 18%);
+  --sidebar-ring: oklch(0.84 0.1 85 / 60%);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-sans);
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [type="button"]:not(:disabled),
+  [type="submit"]:not(:disabled),
+  [type="reset"]:not(:disabled),
+  a[href],
+  select:not(:disabled),
+  input[type="checkbox"]:not(:disabled),
+  input[type="radio"]:not(:disabled) {
+    @apply cursor-pointer;
+  }
+}
+
+@layer components {
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .flex {
+    min-height: 0;
+    min-width: 0;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+      max-width: 1280px;
+    }
+  }
+
+  .font-display {
+    font-family: var(--font-display);
+  }
+  .font-script {
+    font-family: var(--font-script);
+  }
+
+  .text-glow-gold {
+    text-shadow:
+      0 0 20px oklch(0.84 0.1 85 / 45%),
+      0 0 60px oklch(0.84 0.1 85 / 25%);
+  }
+
+  .gold-divider {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      oklch(0.84 0.1 85 / 70%),
+      transparent
+    );
+    height: 1px;
+  }
+}
+
+/* ===== Animações celestiais ===== */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes twinkle {
+    0%,
+    100% {
+      opacity: var(--tw-min-op, 0.25);
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes float-slow {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-14px);
+    }
+  }
+
+  @keyframes pulse-glow {
+    0%,
+    100% {
+      filter: drop-shadow(0 0 12px oklch(0.84 0.1 85 / 35%));
+    }
+    50% {
+      filter: drop-shadow(0 0 28px oklch(0.84 0.1 85 / 65%));
+    }
+  }
+
+  @keyframes shooting {
+    0% {
+      transform: translateX(0) translateY(0) rotate(-25deg);
+      opacity: 0;
+    }
+    8% {
+      opacity: 1;
+    }
+    22% {
+      transform: translateX(-44vw) translateY(20vw) rotate(-25deg);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(-44vw) translateY(20vw) rotate(-25deg);
+      opacity: 0;
+    }
+  }
+
+  .animate-twinkle {
+    animation: twinkle var(--tw-dur, 4s) ease-in-out infinite;
+    animation-delay: var(--tw-delay, 0s);
+  }
+  .animate-float-slow {
+    animation: float-slow 7s ease-in-out infinite;
+  }
+  .animate-pulse-glow {
+    animation: pulse-glow 4.5s ease-in-out infinite;
+  }
+  .animate-shooting {
+    animation: shooting 9s ease-in 2s infinite;
+  }
+
+  @keyframes dust-float {
+    0%   { transform: translate(0, 0) scale(1); opacity: 0; }
+    15%  { opacity: 0.6; }
+    50%  { transform: translate(var(--dust-drift, 20px), -60px) scale(1.4); opacity: 0.4; }
+    85%  { opacity: 0.2; }
+    100% { transform: translate(calc(var(--dust-drift, 20px) * 1.5), -120px) scale(0.8); opacity: 0; }
+  }
+  .animate-dust {
+    animation: dust-float var(--tw-dur, 12s) ease-in-out infinite;
+    animation-delay: var(--tw-delay, 0s);
+  }
+
+  /* scale-108 utilitário para hover em imagens */
+  .group-hover\:scale-108:is(:where(.group):hover *) {
+    transform: scale(1.08);
+  }
+}
